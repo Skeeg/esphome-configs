@@ -4,7 +4,7 @@ wifi:
 
   manual_ip:
     static_ip: $ip_address
-    gateway: !secret wifi_ssid
+    gateway: !secret gateway
     subnet: !secret subnet
     dns1: !secret dns1
     dns2: !secret dns2
