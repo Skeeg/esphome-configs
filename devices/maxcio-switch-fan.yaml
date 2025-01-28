@@ -10,7 +10,7 @@ light:
     disabled_by_default: true
     pin:
       number: GPIO13
-      inverted: true
+      inverted: false
 
 binary_sensor:
   - platform: gpio
@@ -32,7 +32,7 @@ output:
 
 fan:
   - platform: binary
-    name:  $friendly_name
+    name: None
     output: relay_1
     restore_mode: ALWAYS_OFF
     id: fan_1
