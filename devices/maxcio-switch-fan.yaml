@@ -10,7 +10,7 @@ light:
     disabled_by_default: true
     pin:
       number: GPIO13
-      inverted: false
+      inverted: true
 
 binary_sensor:
   - platform: gpio
@@ -23,7 +23,7 @@ binary_sensor:
       - delayed_off: 10ms
     on_press:
       - fan.toggle: fan_1
-      - light.toggle: status_1
+      # - light.toggle: status_1
 
 output:
   - platform: gpio
