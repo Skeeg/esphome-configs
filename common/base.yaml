@@ -24,6 +24,7 @@ web_server:
     password: !secret web_password
 
 logger:
+  level: INFO
 
 time:
   - platform: sntp

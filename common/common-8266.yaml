@@ -2,3 +2,6 @@
 esphome:
   platform: ESP8266
   board: esp01_1m
+
+logger:
+  esp8266_store_log_strings_in_flash: false
