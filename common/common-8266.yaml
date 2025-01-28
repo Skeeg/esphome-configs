@@ -4,4 +4,4 @@ esphome:
   board: esp01_1m
 
 logger:
-  esp8266_store_log_strings_in_flash: false
+  # esp8266_store_log_strings_in_flash: false # default is true, uses more memory when false
