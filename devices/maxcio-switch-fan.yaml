@@ -2,9 +2,6 @@
 substitutions:
   device_model: maxcio
 
-esp8266:
-  restore_from_flash: false
-
 light:
   - platform: status_led
     disabled_by_default: true
