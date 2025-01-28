@@ -2,7 +2,7 @@
 substitutions:
   device_model: maxcio
 
-esphome:
+esp8266:
   restore_from_flash: false
 
 light:
