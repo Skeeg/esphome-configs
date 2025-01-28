@@ -1,0 +1,46 @@
+---
+substitutions:
+  device_model: maxcio
+
+light:
+  - platform: status_led
+    id: status_1
+    internal: true
+    name: "Status LED"
+    disabled_by_default: true
+    pin:
+      number: GPIO13
+      inverted: true
+
+binary_sensor:
+  - platform: gpio
+    name: $friendly_name Button
+    pin: GPIO00
+    # id: reset
+    internal: true
+    filters:
+      - invert:
+      - delayed_off: 10ms
+    on_press:
+      - fan.toggle: fan_1
+      - light.toggle: status_1
+
+output:
+  - platform: gpio
+    pin: GPIO12
+    id: relay_1
+
+fan:
+  - platform: binary
+    name:  $friendly_name
+    output: relay_1
+    restore_mode: ALWAYS_OFF
+    id: fan_1
+    on_turn_on:
+    - logger.log: "Fan Turned On!"
+    - light.turn_on: status_1
+    on_turn_off:
+    - logger.log: "Fan Turned Off!"
+    - light.turn_off: status_1
+
+<<: !include ../common/common-8266.yaml
