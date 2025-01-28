@@ -14,7 +14,7 @@ light:
 
 binary_sensor:
   - platform: gpio
-    name: $name Button
+    name: Button
     pin: GPIO00
     # id: reset
     internal: true
@@ -32,7 +32,7 @@ output:
 
 fan:
   - platform: binary
-    name: $name
+    name: None
     output: relay_1
     restore_mode: ALWAYS_OFF
     id: fan_1
