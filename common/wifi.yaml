@@ -13,12 +13,6 @@ wifi:
     subnet: !secret subnet
     dns1: !secret dns1
     dns2: !secret dns2
-  reboot_timeout: $wifi_reboot_timeout
-
-sensor:
-  - platform: wifi_signal
-    name: "WiFi Signal"
-    update_interval: 60s
-    id: wifi_signal_sensor
+  reboot_timeout: ${wifi_reboot_timeout}
 
 captive_portal:

@@ -8,6 +8,15 @@ light:
     pin:
       inverted: true
       number: GPIO13
+  - platform: binary
+    id: light_1
+    name: None
+    on_turn_off:
+    - light.turn_off: status_1
+    on_turn_on:
+    - light.turn_on: status_1
+    output: relay_1
+    restore_mode: ALWAYS_OFF
 
 binary_sensor:
   - platform: gpio
@@ -18,23 +27,12 @@ binary_sensor:
     internal: true
     name: Button
     on_press:
-      - fan.toggle: fan_1
+      - light.toggle: light_1
     pin: GPIO00
 
 output:
   - platform: gpio
     id: relay_1
     pin: GPIO12
-
-fan:
-  - platform: binary
-    id: fan_1
-    name: None
-    on_turn_off:
-    - light.turn_off: status_1
-    on_turn_on:
-    - light.turn_on: status_1
-    output: relay_1
-    restore_mode: ALWAYS_OFF
 
 <<: !include ../common/common-8266.yaml

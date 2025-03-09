@@ -1,0 +1,9 @@
+---
+substitutions:
+  esp8266_store_log_strings_in_flash: true
+  logger_level: INFO
+
+logger:
+  level: ${logger_level}
+  esp8266_store_log_strings_in_flash: ${esp8266_store_log_strings_in_flash}
+  # default is true, uses more memory when false

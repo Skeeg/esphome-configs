@@ -1,0 +1,58 @@
+# Basic Config
+---
+esp8266:
+  board: sonoff_basic
+
+# Device Specific Config
+binary_sensor:
+  - platform: gpio
+    id: push_button
+    pin:
+      number: GPIO0
+      mode: INPUT_PULLUP
+      inverted: True
+    internal: true
+    on_press:
+      # Prevents unintended LED lit states.
+      if:
+        condition:
+          - fan.is_off: relay
+        then:
+          - light.turn_on: blue_led
+          - fan.turn_on: relay
+        else:
+          - fan.turn_off: relay
+
+light:
+  - platform: status_led
+    disabled_by_default: true
+    id: blue_led
+    internal: true
+    name: "Status LED"
+    pin:
+      inverted: true
+      number: GPIO13
+
+output:
+  - platform: gpio
+    id: relay_1
+    pin: GPIO12
+
+fan:
+  - platform: binary
+    id: fan_1
+    name: None
+    on_turn_off:
+      if:
+        condition:
+          - light.is_on: blue_led
+        then:
+          - light.turn_off: blue_led
+    on_turn_on:
+      if:
+        condition:
+          - light.is_off: blue_led
+        then:
+          - light.turn_on: blue_led
+    output: relay_1
+    restore_mode: ALWAYS_OFF
