@@ -1,5 +1,6 @@
 {
   "files.associations": {
     "*.yaml": "esphome"
-  }
+  },
+  "esphome.dashboardUri": "127.0.0.1:6052"
 }

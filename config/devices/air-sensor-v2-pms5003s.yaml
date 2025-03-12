@@ -29,8 +29,11 @@ packages:
   logger: !include ../common/logger.yaml
   ota: !include ../common/ota.yaml
   time: !include ../common/time.yaml
-  web: !include ../common/web-server.yaml
+  # web: !include ../common/web-server.yaml
   wifi: !include ../common/wifi.yaml
+
+preferences:
+  flash_write_interval: 5min
 
 esphome:
   name: ${name}
@@ -50,12 +53,6 @@ esp32:
 
 wifi:
   output_power : 18
-
-
-
-# Allow provisioning Wi-Fi via serial
-improv_serial:
-
 
 dashboard_import:
   package_import_url: github://esphome/firmware/esphome-web/esp32s2.yaml@main
@@ -179,15 +176,11 @@ display:
       auto co2 = id(co2_scd40).state;
       auto e_co2 = id(eco2_ens160).state;
       auto s_co2 = id(eco2_sgp30).state;
-      auto ch2o = id(ch2o_ze08).state;
       auto e_voc = id(tvoc_ens160).state;
       auto s_voc = id(tvoc_sgp30).state;
       auto pm1 = id(pm1_pms).state;
       auto pm25 = id(pm25_pms).state;
       auto pm10 = id(pm10_pms).state;
-      auto formaldehyde = id(formaldehyde_pms).state;
-      auto aqi_voc = id(aqi_voc_sgp41).state;
-      auto aqi_nox = id(aqi_nox_sgp41).state;
       ;
       ;
       ;
@@ -213,13 +206,6 @@ display:
       if (s_co2 > 1500){col = id(red);}
       if (s_co2 > 1800){col = id(purple);}
       auto s_co2_c = col;
-      ;
-      col = id(white);
-      if (ch2o > 60){col = id(yellow);}
-      if (ch2o > 100){col = id(orange);}
-      if (ch2o > 150){col = id(red);}
-      if (ch2o > 200){col = id(purple);}
-      auto ch2o_c = col;
       ;
       col = id(white);
       if (e_voc > 400){col = id(yellow);}
@@ -258,8 +244,8 @@ display:
       ;
       ;
       // SELECT BEST AVAILABLE TEMPERATURE SENSOR
-      float temps[5] = {id(temp_sht40).state, id(temp_aht20).state, id(temp_scd40).state, id(temp_aht20_ens).state, id(temp_bmp280).state};
-      float hums[4] = {id(hum_sht40).state, id(hum_aht20).state, id(hum_scd40).state, id(hum_aht20_ens).state};
+      float temps[4] = {id(temp_aht20).state, id(temp_scd40).state, id(temp_aht20_ens).state, id(temp_bmp280).state};
+      float hums[3] = {id(hum_aht20).state, id(hum_scd40).state, id(hum_aht20_ens).state};
       float temp = 0;
       float hum = 0;
       for(int i = 0; i < 5; i++){
@@ -360,21 +346,19 @@ display:
       ;
       // PREPARE VOC
       ;
-      bool draw_general_voc = (!isnan(ch2o) or !isnan(e_voc) or !isnan(s_voc));
-      bool draw_sgp4x = (!isnan(aqi_voc) or !isnan(aqi_nox));
-      if (draw_general_voc or draw_sgp4x){
+      bool draw_general_voc = (!isnan(e_voc) or !isnan(s_voc));
+      // bool draw_sgp4x = (!isnan(aqi_voc) or !isnan(aqi_nox));
+      // if (draw_general_voc or draw_sgp4x){
+      if (draw_general_voc){
       count = 0;
       title = "VOC";
       unit = "ppb";
       names[0] = "SGP30";
       names[1] = "ENS160";
-      names[2] = "ZE08-CH2O";
       values[0] = s_voc;
       values[1] = e_voc;
-      values[2] = ch2o;
       colors[0] = s_voc_c;
       colors[1] = e_voc_c;
-      colors[2] = ch2o_c;
       ;
       ;
       // START REUSABLE | UNIT CONDITION ADDED
@@ -395,24 +379,23 @@ display:
       else {cy += 46;}
       }
       // START SGP4x
-      cy+=2;
-      auto sgp4x = "SGP41";
-      if (isnan(aqi_nox)){sgp4x = "SGP40";}
-      if(!isnan(aqi_voc)){
-      col = id(white);
-      it.printf(2, cy, fl14, id(grey), TextAlign::CENTER_LEFT, "%s VOC Index", sgp4x);
-      it.printf(180, cy, fl14, id(grey), TextAlign::CENTER_LEFT, "(1 ... 500)");
-      it.printf(180, cy, fl14, col, TextAlign::CENTER_RIGHT, "%.0f ", aqi_voc);
-      cy+=15;
-      }
-      ;
-      if(!isnan(aqi_nox)){
-      col = id(white);
-      it.printf(2, cy, fl14, id(grey), TextAlign::CENTER_LEFT, "%s NOx Index", sgp4x);
-      it.printf(180, cy, fl14, id(grey), TextAlign::CENTER_LEFT, "(1 ... 500)");
-      it.printf(180, cy, fl14, col, TextAlign::CENTER_RIGHT, "%.0f ", aqi_nox);
-      }
-      ;
+      // cy+=2;
+      // if (isnan(aqi_nox)){sgp4x = "SGP40";}
+      // if(!isnan(aqi_voc)){
+      // col = id(white);
+      // it.printf(2, cy, fl14, id(grey), TextAlign::CENTER_LEFT, "%s VOC Index", sgp4x);
+      // it.printf(180, cy, fl14, id(grey), TextAlign::CENTER_LEFT, "(1 ... 500)");
+      // it.printf(180, cy, fl14, col, TextAlign::CENTER_RIGHT, "%.0f ", aqi_voc);
+      // cy+=15;
+      // }
+      // ;
+      // if(!isnan(aqi_nox)){
+      // col = id(white);
+      // it.printf(2, cy, fl14, id(grey), TextAlign::CENTER_LEFT, "%s NOx Index", sgp4x);
+      // it.printf(180, cy, fl14, id(grey), TextAlign::CENTER_LEFT, "(1 ... 500)");
+      // it.printf(180, cy, fl14, col, TextAlign::CENTER_RIGHT, "%.0f ", aqi_nox);
+      // }
+      // ;
       // END VOC & SGP4x
       ;
       ;
@@ -422,38 +405,6 @@ display:
       width: 240
 
 uart:
-  - tx_pin: ${uart_tx_pin}
-    rx_pin: ${uart_rx_pin}
-    baud_rate: 9600
-    id: uart_ze08
-    parity: none
-    data_bits: 8
-    stop_bits: 1
-    debug: 
-      direction: BOTH
-      dummy_receiver: true
-      after:
-        # bytes: 9 
-        timeout: 10ms
-      sequence:
-        - lambda: |-
-            //UARTDebug::log_int(direction, bytes, ',');                 // Log the message as int. 
-            //UARTDebug::log_hex(direction, bytes, ',');                 // Log the message in hex.
-            ESP_LOGD("custom", "Bytes size: %d", bytes.size());
-            if (direction == UART_DIRECTION_RX)                        
-              {
-                  if (bytes.size() == 9)                               
-                    {
-                        if ( bytes[0] == 0xFF &&                       // Check sensor identification
-                            bytes[1] == 0x17
-                            )       
-                          {
-                            float value = float((bytes[4] * 256) + bytes[5]);  // Decode message
-                            id(ch2o_ze08).publish_state(value);     // Publish results to a sensor.
-                          }
-                    }
-              }
-
   - tx_pin: ${uart_pms_tx_pin}
     rx_pin: ${uart_pms_rx_pin}
     baud_rate: 9600
@@ -476,28 +427,6 @@ i2c:
     id: ${i2c_2_id}
 
 sensor:
-  - platform: template
-    name: "ZE08 CH2O"
-    unit_of_measurement: ppb
-    state_class: measurement
-    device_class: volatile_organic_compounds
-    id: ch2o_ze08
-    filters: 
-      - filter_out: 2000.0
-      - exponential_moving_average: 
-          send_every: 1
-          alpha: 0.5
-
-  - platform: debug
-    free:
-      name: "Heap Free"
-      id: heap_free
-      # disabled_by_default: True
-    loop_time:
-      name: "Loop Time"
-      id: loop_time
-      # disabled_by_default: True
-
   - platform: aht10
     #address: 0x38
     i2c_id: i2c_main
@@ -520,18 +449,6 @@ sensor:
     pressure:
       name: "BMP280 Pressure"
       id: pres_bmp280
-    update_interval: 10s
-
-
-  - platform: sht4x
-    #addr 0x44
-    i2c_id: i2c_main
-    temperature:
-      name: "SHT40 Temperature"
-      id: temp_sht40
-    humidity:
-      name: "SHT40 Relative Humidity"
-      id: hum_sht40
     update_interval: 10s
 
   - platform: scd4x
@@ -607,29 +524,6 @@ sensor:
     compensation: 
       humidity_source: hum_aht20
       temperature_source: temp_aht20
-
-  - platform: sgp4x
-    i2c_id: i2c_main
-    #address: 0x59
-    voc:
-      name: "SGP41 VOC Index"
-      id: aqi_voc_sgp41
-      icon: "mdi:air-filter"
-      device_class: aqi
-      state_class: measurement
-      unit_of_measurement: "index points"
-    nox:
-      name: "SGP41 NOx Index"
-      id: aqi_nox_sgp41
-      icon: "mdi:air-filter"
-      device_class: aqi
-      state_class: measurement
-      unit_of_measurement: "index points"
-    compensation: 
-      humidity_source: hum_aht20
-      temperature_source: temp_aht20
-    store_baseline: True
-    update_interval: 10s
 
   - platform: pmsx003
     type: PMS5003S
