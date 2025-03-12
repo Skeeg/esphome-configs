@@ -1,0 +1,16 @@
+services:
+  esphome:
+    container_name: esphome
+    image: esphome/esphome
+    volumes:
+      - ./config:/config:rw
+      - /etc/localtime:/etc/localtime:ro
+    restart: always
+    network_mode: bridge
+    environment:
+      - PUID=1000
+      - PGID=1000
+      # - TZ=Etc/UTC
+      - ESPHOME_DASHBOARD_USE_PING=true
+    ports:
+      - 6052:6052

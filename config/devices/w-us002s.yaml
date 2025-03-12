@@ -1,26 +1,44 @@
 ---
+substitutions:
+  physical_button_pin: GPIO1
+  sel_pin: GPIO12
+  cf_pin: GPIO4
+  cf1_pin: GPIO5
+  relay_pin: GPIO14
+  status_led_pin: GPIO13
+  voltage_divider: "2351"
+  current_resistor: "0.001"
+  current_multiply: "1.0"
+  esp8266_board: esp01_1m
+
+packages:
+  api: !include ../common/api.yaml
+  common-elements: !include ../common/common-elements.yaml
+  common-esp8266: !include ../common/common-esp8266.yaml
+  esphome: !include ../common/esphome.yaml
+  logger: !include ../common/logger.yaml
+  ota: !include ../common/ota.yaml
+  time: !include ../common/time.yaml
+  web: !include ../common/web-server.yaml
+  wifi: !include ../common/wifi.yaml
+
 binary_sensor:
   - platform: gpio
     pin:
-      number: GPIO1
+      number: ${physical_button_pin}
       mode: INPUT_PULLUP
       inverted: True
     name: "${friendly_name} Button"
     on_press:
       - switch.toggle: relay
-  - platform: status
-    name: "${friendly_name} Status"
 
 sensor:
-  - platform: wifi_signal
-    name: "${friendly_name} WiFi Signal"
-    update_interval: 60s
   - platform: hlw8012
     current_resistor: ${current_resistor}
     voltage_divider: ${voltage_divider}
-    sel_pin: GPIO12
-    cf_pin: GPIO4
-    cf1_pin: GPIO5
+    sel_pin: ${sel_pin}
+    cf_pin: ${cf_pin}
+    cf1_pin: ${cf1_pin}
     update_interval: 30s
     initial_mode: voltage
     change_mode_every: 8
@@ -46,6 +64,8 @@ sensor:
       accuracy_decimals: 2
       filters:
         - throttle: 30s
+        - multiply: 0.001
+      unit_of_measurement: kWh
     # apparent_power: #(only available with version 2024.3.0 or greater)
     #   name: "${friendly_name} Apparent Power"
     #   filters:
@@ -56,19 +76,30 @@ sensor:
     #   filters:
     #     - throttle_average: 60s
 
-  - platform: total_daily_energy #(Optional, not specific to cse7766)
-    name: "${friendly_name} Daily Energy"
-    power_id: my_power
-    accuracy_decimals: 2
+  # - platform: total_daily_energy #(Optional, not specific to cse7766)
+  #   name: "${friendly_name} Daily Energy"
+  #   power_id: my_power
+  #   accuracy_decimals: 2
+
+  - platform: integration
+    name: 'Total Energy'
+    sensor: my_power
+    time_unit: h
+    restore: true
+    state_class: total_increasing
+    device_class: energy
+    filters:
+      - multiply: 0.001
+    unit_of_measurement: kWh
 
 switch:
   - platform: gpio
     name: "${friendly_name}"
-    pin: GPIO14
+    pin: ${relay_pin}
     id: relay
     restore_mode: ALWAYS_ON
 
 status_led:
   pin:
-    number: GPIO13
+    number: ${status_led_pin}
     inverted: True

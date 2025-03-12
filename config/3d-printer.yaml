@@ -1,0 +1,13 @@
+---
+# Basic Config
+substitutions:
+  name: 3dprinter
+  friendly_name: 3d Printer
+  ip_address: 10.3.2.17
+  voltage_divider: "2351"
+  current_resistor: "0.001"
+  current_multiply: "1.0"
+
+packages:
+  w-us002s: !include devices/w-us002s.yaml
+  # button-factory-reset: !include common/buttons/factory-reset.yaml

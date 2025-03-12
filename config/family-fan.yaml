@@ -1,0 +1,8 @@
+---
+substitutions:
+  name: family-fan
+  friendly_name: Family Fan
+  ip_address: 10.3.2.16
+
+packages:
+  family-fan: !include devices/maxcio-switch-fan.yaml

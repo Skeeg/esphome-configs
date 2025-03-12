@@ -1,0 +1,12 @@
+---
+substitutions:
+  id_prefix: main_gdo
+  name: main-garage
+  friendly_name: Main Garage
+  ip_address: 10.3.2.31
+
+packages:
+  ratgdo: !include devices/ratgdo-25i.yaml
+
+esphome:
+  area: 'garage'

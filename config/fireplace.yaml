@@ -1,0 +1,11 @@
+# Basic Config
+---
+substitutions:
+  name: fireplace
+  friendly_name: Fireplace
+  ip_address: 10.3.2.20
+  mdi_icon: mdi:fire
+
+packages:
+  sonoff-basic-r2-custom-mdi: !include devices/sonoff-basic-r2-custom-mdi.yaml
+  button-factory-reset: !include common/buttons/factory-reset.yaml

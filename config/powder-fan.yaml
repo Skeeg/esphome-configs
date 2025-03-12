@@ -1,0 +1,8 @@
+---
+substitutions:
+  name: powder-fan
+  friendly_name: Powder Fan
+  ip_address: 10.3.2.18
+
+packages:
+  powder-fan: !include devices/maxcio-switch-fan.yaml

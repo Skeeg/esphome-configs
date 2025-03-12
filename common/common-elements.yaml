@@ -1,4 +1,0 @@
----
-binary_sensor: !include_dir_list common/binary_sensors
-button: !include_dir_list common/buttons
-sensor: !include_dir_list common/sensors

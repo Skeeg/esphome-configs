@@ -1,0 +1,36 @@
+---
+substitutions:
+  esp8266_board: esp01_1m
+  uart_tx_pin: GPIO1
+  uart_rx_pin: GPIO3
+
+packages:
+  api: !include ../common/api.yaml
+  common-elements: !include ../common/common-elements.yaml
+  common-esp8266: !include ../common/common-esp8266.yaml
+  esphome: !include ../common/esphome.yaml
+  logger: !include ../common/logger.yaml
+  ota: !include ../common/ota.yaml
+  time: !include ../common/time.yaml
+  web: !include ../common/web-server.yaml
+  wifi: !include ../common/wifi.yaml
+
+# disable serial logging by setting baud_rate to 0 because baud_rate/serial connection is used by tuyamcu
+logger:
+  baud_rate: 0
+
+uart:
+  rx_pin: ${uart_rx_pin}
+  tx_pin: ${uart_tx_pin}
+  baud_rate: 9600
+
+tuya:
+
+light:
+  - platform: "tuya"
+    name: "Feit Dimmer Light"
+    dimmer_datapoint: 2
+    switch_datapoint: 1
+    min_value: 10
+    max_value: 1000
+  

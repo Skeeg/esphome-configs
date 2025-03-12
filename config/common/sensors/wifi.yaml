@@ -1,0 +1,11 @@
+---
+text_sensor:
+  - platform: wifi_info
+    ip_address:
+      name: IP
+
+sensor:
+  - platform: wifi_signal
+    name: "WiFi Signal"
+    update_interval: 60s
+    id: wifi_signal_sensor
