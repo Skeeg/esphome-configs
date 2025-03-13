@@ -8,7 +8,9 @@ substitutions:
   name: printer-air-sensor
   friendly_name: Printer Air Sensor
   ip_address: 10.3.2.22
-  web_server_version: "2"
+  # web_server_version: "2"
+  display_heading_1: "Farticles"
 
 packages:
   printer_air_sensor: !include devices/air-sensor-v2-pms5003s.yaml
+  # web: !include common/web-server.yaml

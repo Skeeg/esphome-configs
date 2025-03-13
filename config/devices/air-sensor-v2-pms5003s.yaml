@@ -20,6 +20,9 @@ substitutions:
   spi_clk_pin: GPIO01
   spi_mosi_pin: GPIO02
   spi_miso_pin: GPIO16
+  display_heading_1: "Particles"
+  display_heading_2: "CO2"
+  display_heading_3: "VOC"
 
 packages:
   api: !include ../common/api.yaml
@@ -124,7 +127,7 @@ font:
     size: 36
     bpp: 4
     glyphs: [
-      "2",C,O,F,V,a,c,e,i,l,r,s,t
+      "2",C,O,P,V,F,a,c,e,i,l,r,s,t
       ]
 
 
@@ -266,8 +269,9 @@ display:
       // PREPARE VARIABLES
       auto title = "";
       auto unit = "";
-      char *names[3];
+      const char *names[3];
       float values[3];
+      int var_count = 3;
       esphome::Color colors[3];
       int count = 0;
       ;
@@ -277,7 +281,8 @@ display:
       ;
       if (!isnan(pm1)){
       count = 0;
-      title = "Farticles";
+      var_count = 3;
+      title = "${display_heading_1}";
       unit = "µg/m³";
       names[0] = "PM1";
       names[1] = "PM2.5";
@@ -295,7 +300,7 @@ display:
       it.print(2, cy + 22, fh36, id(light_grey), TextAlign::CENTER_LEFT, title);
       it.print(w-2, cy + 31, fl14, id(grey), TextAlign::CENTER_RIGHT, unit);
       ix = 0;
-      for (int i = 0; i < 3; i++){
+      for (int i = 0; i < var_count; i++){
       if(isnan(values[i])){continue;}
       it.printf(w/6*(1+ix*2), cy + 58, fl14, id(grey), TextAlign::BOTTOM_CENTER, "%s", names[i]);
       it.printf(w/6*(1+ix*2), cy + 50, fv30, colors[i], display::TextAlign::TOP_CENTER, "%.0f", values[i]);
@@ -312,6 +317,7 @@ display:
       ;
       if (!isnan(co2) or !isnan(e_co2) or !isnan(s_co2)){
       count = 0;
+      var_count = 3;
       title = "CO2";
       unit = "ppm";
       names[0] = "SCD40";
@@ -330,7 +336,7 @@ display:
       it.print(2, cy + 22, fh36, id(light_grey), TextAlign::CENTER_LEFT, title);
       it.print(w-2, cy + 31, fl14, id(grey), TextAlign::CENTER_RIGHT, unit);
       ix = 0;
-      for (int i = 0; i < 3; i++){
+      for (int i = 0; i < var_count; i++){
       if(isnan(values[i])){continue;}
       it.printf(w/6*(1+ix*2), cy + 58, fl14, id(grey), TextAlign::BOTTOM_CENTER, "%s", names[i]);
       it.printf(w/6*(1+ix*2), cy + 50, fv30, colors[i], display::TextAlign::TOP_CENTER, "%.0f", values[i]);
@@ -351,7 +357,8 @@ display:
       // if (draw_general_voc or draw_sgp4x){
       if (draw_general_voc){
       count = 0;
-      title = "VOC";
+      var_count = 2;
+      title = "${display_heading_3}";
       unit = "ppb";
       names[0] = "SGP30";
       names[1] = "ENS160";
@@ -366,7 +373,7 @@ display:
       it.print(2, cy + 22, fh36, id(light_grey), TextAlign::CENTER_LEFT, title);
       if (draw_general_voc){it.print(w-2, cy + 31, fl14, id(grey), TextAlign::CENTER_RIGHT, unit);}
       ix = 0;
-      for (int i = 0; i < 3; i++){
+      for (int i = 0; i < var_count; i++){
       if(isnan(values[i])){continue;}
       it.printf(w/6*(1+ix*2), cy + 58, fl14, id(grey), TextAlign::BOTTOM_CENTER, "%s", names[i]);
       it.printf(w/6*(1+ix*2), cy + 50, fv30, colors[i], display::TextAlign::TOP_CENTER, "%.0f", values[i]);
@@ -380,6 +387,7 @@ display:
       }
       // START SGP4x
       // cy+=2;
+      // auto sgp4x = "SGP41";
       // if (isnan(aqi_nox)){sgp4x = "SGP40";}
       // if(!isnan(aqi_voc)){
       // col = id(white);
