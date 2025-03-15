@@ -17,23 +17,9 @@ packages:
 bk72xx:
   board: ${bk72xx_board}
 
-text_sensor:
   - platform: libretiny
     version:
       name: LibreTiny Version
-
-uart:
-  rx_pin: ${uart_rx_pin}
-  tx_pin: ${uart_tx_pin}
-  baud_rate: 9600
-
-tuya:
-  # DPIDs processed from schema model: 000002i7su
-
-switch:
-  - platform: tuya
-    switch_datapoint: 1
-    name: Switch Led 1
 
 number:
   - platform: tuya
@@ -66,3 +52,16 @@ select:
       0: "Off"
       1: Low
       2: High
+
+switch:
+  - platform: tuya
+    switch_datapoint: 1
+    name: Switch Led 1
+
+tuya:
+  # DPIDs processed from schema model: 000002i7su
+
+uart:
+  rx_pin: ${uart_rx_pin}
+  tx_pin: ${uart_tx_pin}
+  baud_rate: 9600

@@ -15,17 +15,6 @@ packages:
   web: !include ../common/web-server.yaml
   wifi: !include ../common/wifi.yaml
 
-# disable serial logging by setting baud_rate to 0 because baud_rate/serial connection is used by tuyamcu
-logger:
-  baud_rate: 0
-
-uart:
-  rx_pin: ${uart_rx_pin}
-  tx_pin: ${uart_tx_pin}
-  baud_rate: 9600
-
-tuya:
-
 light:
   - platform: "tuya"
     name: "Feit Dimmer Light"
@@ -33,4 +22,14 @@ light:
     switch_datapoint: 1
     min_value: 10
     max_value: 1000
-  
+
+# disable serial logging by setting baud_rate to 0 because baud_rate/serial connection is used by tuyamcu
+logger:
+  baud_rate: 0
+
+tuya:
+
+uart:
+  rx_pin: ${uart_rx_pin}
+  tx_pin: ${uart_tx_pin}
+  baud_rate: 9600

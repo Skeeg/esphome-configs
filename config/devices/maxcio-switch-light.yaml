@@ -16,6 +16,18 @@ packages:
   web: !include ../common/web-server.yaml
   wifi: !include ../common/wifi.yaml
 
+binary_sensor:
+  - platform: gpio
+    filters:
+      - delayed_off: 10ms
+      - invert:
+    id: button_1
+    internal: true
+    name: Button
+    on_press:
+      - light.toggle: light_1
+    pin: ${physical_button_pin}
+
 light:
   - platform: status_led
     disabled_by_default: true
@@ -34,18 +46,6 @@ light:
     - light.turn_on: status_1
     output: relay_1
     restore_mode: ALWAYS_OFF
-
-binary_sensor:
-  - platform: gpio
-    filters:
-      - delayed_off: 10ms
-      - invert:
-    id: button_1
-    internal: true
-    name: Button
-    on_press:
-      - light.toggle: light_1
-    pin: ${physical_button_pin}
 
 output:
   - platform: gpio

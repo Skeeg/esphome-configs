@@ -92,14 +92,14 @@ sensor:
       - multiply: 0.001
     unit_of_measurement: kWh
 
+status_led:
+  pin:
+    number: ${status_led_pin}
+    inverted: True
+
 switch:
   - platform: gpio
     name: "${friendly_name}"
     pin: ${relay_pin}
     id: relay
     restore_mode: ALWAYS_ON
-
-status_led:
-  pin:
-    number: ${status_led_pin}
-    inverted: True

@@ -39,12 +39,6 @@ binary_sensor:
     output: relay_1
     restore_mode: ALWAYS_OFF
 
-output:
-  - platform: gpio
-    id: relay_1
-    pin: ${relay_pin}
-
-
 light:
   - platform: status_led
     id: blue_led
@@ -52,6 +46,11 @@ light:
     pin:
       number: ${status_led_pin}
       inverted: True
+
+output:
+  - platform: gpio
+    id: relay_1
+    pin: ${relay_pin}
 
 switch:
   # The relay switches on the red side of the LED when active.
