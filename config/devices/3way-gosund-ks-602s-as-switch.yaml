@@ -1,0 +1,90 @@
+---
+substitutions:
+  esp8266_board: esp01_1m
+  physical_button_pin: GPIO00
+  relay_pin: GPIO14
+  status_led_pin: GPIO1 #Green Light
+  led_link_pin: GPIO16 #Red Light
+  status_led_transition_length: 0ms
+  hass_service_to_control1: switch
+  hass_service_to_control2: switch
+  # If you don't provide a value for these, it will just send the ${literal_value} string to Home Assistant which will not align with anything and is acceptable.
+  # hass_entity_to_control1: light.null_light
+  # hass_entity_to_control2: light.null_light
+
+packages:
+  api: !include ../common/api.yaml
+  common-elements: !include ../common/common-elements.yaml
+  common-esp8266: !include ../common/common-esp8266.yaml
+  esphome: !include ../common/esphome.yaml
+  logger: !include ../common/logger.yaml
+  ota: !include ../common/ota.yaml
+  time: !include ../common/time.yaml
+  web: !include ../common/web-server.yaml
+  wifi: !include ../common/wifi.yaml
+
+status_led:
+  pin:
+    number: ${status_led_pin}
+    inverted: true
+
+output:
+  - platform: esp8266_pwm
+    id: state_led
+    pin:
+      number: ${led_link_pin}
+      inverted: true
+
+light:
+  - platform: monochromatic
+    output: state_led
+    id: status_1
+    name: Status LED
+    default_transition_length: ${status_led_transition_length}
+    internal: true
+    disabled_by_default: true
+
+binary_sensor:
+  - platform: gpio
+    pin:
+      number: ${physical_button_pin}
+      inverted: true
+    id: button1
+    on_press:
+      - switch.toggle: relay1
+    internal: true
+
+switch:
+  - platform: gpio
+    pin: ${relay_pin}
+    id: relay1
+    name: None
+    icon: "mdi:light-switch"
+    on_turn_on:
+      - light.turn_on: led
+      - if:
+          condition:
+            api.connected:
+          then:
+            - homeassistant.service:
+                service: ${hass_service_to_control1}.turn_on
+                data:
+                  entity_id: ${hass_service_to_control1}.${hass_entity_to_control1}
+            - homeassistant.service:
+                service: ${hass_service_to_control2}.turn_on
+                data:
+                  entity_id: ${hass_service_to_control2}.${hass_entity_to_control2}
+    on_turn_off:
+      - light.turn_off: led
+      - if:
+          condition: 
+            api.connected:
+          then:
+            - homeassistant.service:
+                service: ${hass_service_to_control1}.turn_off
+                data:
+                  entity_id: ${hass_service_to_control1}.${hass_entity_to_control1}
+            - homeassistant.service:
+                service: ${hass_service_to_control2}.turn_off
+                data:
+                  entity_id: ${hass_service_to_control2}.${hass_entity_to_control2}

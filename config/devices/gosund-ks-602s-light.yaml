@@ -1,0 +1,64 @@
+---
+substitutions:
+  esp8266_board: esp01_1m
+  physical_button_pin: GPIO00
+  relay_pin: GPIO14
+  status_led_pin: GPIO1 #Green Light
+  led_link_pin: GPIO16 #Red Light
+  status_led_transition_length: 0ms
+
+packages:
+  api: !include ../common/api.yaml
+  common-elements: !include ../common/common-elements.yaml
+  common-esp8266: !include ../common/common-esp8266.yaml
+  esphome: !include ../common/esphome.yaml
+  logger: !include ../common/logger.yaml
+  ota: !include ../common/ota.yaml
+  time: !include ../common/time.yaml
+  web: !include ../common/web-server.yaml
+  wifi: !include ../common/wifi.yaml
+
+status_led:
+  pin:
+    number: ${status_led_pin}
+    inverted: true
+
+light:
+  - platform: monochromatic
+    output: state_led
+    id: status_1
+    name: Status LED
+    default_transition_length: ${status_led_transition_length}
+    internal: true
+    disabled_by_default: true
+  - platform: binary
+    id: light_1
+    name: None
+    on_turn_on:
+      - light.turn_on: status_1
+    on_turn_off:
+      - light.turn_off: status_1
+    output: relay_1
+    restore_mode: ALWAYS_OFF
+
+binary_sensor:
+  - platform: gpio
+    filters:
+      - delayed_off: 10ms
+      - invert:
+    id: button_1
+    internal: true
+    name: Button
+    on_press:
+      - light.toggle: light_1
+    pin: ${physical_button_pin}
+
+output:
+  - platform: gpio
+    id: relay_1
+    pin: ${relay_pin}
+  - platform: esp8266_pwm
+    id: state_led
+    pin:
+      number: ${led_link_pin}
+      inverted: true

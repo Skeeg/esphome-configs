@@ -1,0 +1,11 @@
+---
+substitutions:
+  name: library-lights
+  friendly_name: Library Lights
+  ip_address: 10.3.2.37
+
+packages:
+  study_lights: !include devices/gosund-ks-602s-light.yaml
+
+esphome:
+  area: library

@@ -1,0 +1,13 @@
+---
+substitutions:
+  name: main-hall-second
+  friendly_name: Main Hall Secondary
+  ip_address: 10.3.2.35
+  relay_pin: GPIO4 # Black hole, this is just a control switch.  Don't need the relay clicking on.
+  led_link_pin: GPIO1
+  status_led_pin: GPIO16 #Green when engaged
+  hass_service_to_control1: light
+  hass_entity_to_control1: main_hall_lights
+
+packages:
+  mainsecond: !include devices/3way-gosund-ks-602s-as-light.yaml
