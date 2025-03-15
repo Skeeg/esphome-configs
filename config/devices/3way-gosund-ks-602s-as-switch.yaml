@@ -49,7 +49,7 @@ binary_sensor:
     pin:
       number: ${physical_button_pin}
       inverted: true
-    id: button1
+    id: button_1
     on_press:
       - switch.toggle: relay1
     internal: true

@@ -7,5 +7,5 @@ substitutions:
   mdi_icon: mdi:fire
 
 packages:
-  sonoff-basic-r2-custom-mdi: !include devices/sonoff-basic-r2-custom-mdi.yaml
-  button-factory-reset: !include common/buttons/factory-reset.yaml
+  sonoff-basic-r2-custom-mdi: !include devices/sonoff-basic-r2-as-switch-custom.yaml
+  # button-factory-reset: !include common/buttons/factory-reset.yaml

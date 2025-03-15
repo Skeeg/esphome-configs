@@ -20,7 +20,8 @@ packages:
 # Device Specific Config
 binary_sensor:
   - platform: gpio
-    id: push_button
+    id: button_1
+    name: "Button"
     pin:
       number: ${physical_button_pin}
       mode: INPUT_PULLUP
@@ -41,6 +42,7 @@ light:
   - platform: status_led
     id: blue_led
     internal: True
+    name: Status LED
     pin:
       number: ${status_led_pin}
       inverted: True
@@ -48,13 +50,10 @@ light:
 switch:
   # The relay switches on the red side of the LED when active.
   - platform: gpio
-    name: ''
+    name: None
     pin: ${relay_pin}
-    icon: ${mdi_icon}
     id: ${name}_relay
     on_turn_off:
-      if:
-        condition:
-          - light.is_on: blue_led
-        then:
-          - light.turn_off: blue_led
+      - light.turn_off: blue_led
+    on_turn_on:
+      - light.turn_on: blue_led
