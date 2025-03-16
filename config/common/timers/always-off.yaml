@@ -1,0 +1,19 @@
+substitutions:
+  off_timer_scope: switch
+  off_timer_device: relay
+  off_timer_seconds: "0"
+  off_timer_minutes: "/15"
+
+time:
+  - platform: sntp
+    # ...
+    on_time:
+      - seconds: ${off_timer_seconds}
+        minutes: ${off_timer_minutes}
+        then:
+          - ${off_timer_scope}.turn_off: ${off_timer_device}
+
+      # # Cron syntax
+      # - cron: '${off_timer_seconds} ${off_timer_minutes} * * * *'
+      #   then:
+      #     - ${off_timer_scope}.turn_off: ${off_timer_device}

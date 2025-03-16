@@ -188,7 +188,7 @@ external_components:
       url: https://github.com/ratgdo/esphome-ratgdo
     refresh: 1s
 
-improv_serial:
+improv_serial: #improv_serial requires the logger baud_rate to be not 0.
 
 light:
   - platform: ratgdo

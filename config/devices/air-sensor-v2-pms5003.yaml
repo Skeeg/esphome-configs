@@ -1,5 +1,8 @@
 ---
-# Source https://www.printables.com/model/1079858-3d-printer-emission-sensor-array-sensorbox-v2
+# Based on Source https://www.printables.com/model/1079858-3d-printer-emission-sensor-array-sensorbox-v2
+# Sensorbox v2 config for PCB SBR1
+# config r2 (20241130)
+# https://go.toms3d.org/sbr1
 substitutions:
   esp32_board: esp32-s2-saola-1
   backlight_pin: GPIO15

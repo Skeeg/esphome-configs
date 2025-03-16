@@ -1,10 +1,11 @@
 ---
 substitutions:
-  id_prefix: workspace_monitor
   name: workspace-monitor
   friendly_name: Workspace Monitor
   ip_address: 10.3.2.32
   
 packages:
-  wemod1-bme280: !include devices/wemod1-bme280.yaml
-  button-factory-reset: !include common/buttons/factory-reset.yaml
+  climate-sensor: !include devices/wemod1-bme280.yaml
+
+esphome:
+  area: 'office'

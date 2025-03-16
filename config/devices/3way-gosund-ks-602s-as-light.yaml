@@ -1,10 +1,14 @@
 ---
 substitutions:
   esp8266_board: esp01_1m
+  #GPIO1 is Green Light
+  #GPIO16 is Red Light
+  # led_link_pin: GPIO16 #Recommended from ESPHome documentation.
+  # status_led_pin: GPIO1  #Recommended from ESPHome documentation.
   physical_button_pin: GPIO00
+  led_link_pin: GPIO1 #Preferred for me.
   relay_pin: GPIO14
-  status_led_pin: GPIO1 #Green Light
-  led_link_pin: GPIO16 #Red Light
+  status_led_pin: GPIO16 #Preferred for me.
   status_led_transition_length: 0ms
   hass_service_to_control1: switch
   hass_service_to_control2: switch

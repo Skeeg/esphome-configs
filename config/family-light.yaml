@@ -3,7 +3,9 @@ substitutions:
   name: family-light
   friendly_name: Family Light
   ip_address: 10.3.2.21
-  esp8266_board: esp01_1m
 
 packages:
-  family-light: !include devices/maxcio-switch-light.yaml
+  light: !include devices/maxcio-switch-light.yaml
+
+esphome:
+  area: 'main'

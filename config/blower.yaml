@@ -1,4 +1,3 @@
-# Basic Config
 ---
 substitutions:
   name: blower
@@ -6,4 +5,7 @@ substitutions:
   ip_address: 10.3.2.19
 
 packages:
-  blower: !include devices/sonoff-basic-r2-as-fan.yaml
+  fan: !include devices/sonoff-basic-r2-as-fan.yaml
+
+esphome:
+  area: 'main'

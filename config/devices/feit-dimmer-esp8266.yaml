@@ -1,6 +1,7 @@
 ---
 substitutions:
   esp8266_board: esp01_1m
+  logger_baud_rate: 0 # disable serial logging by setting baud_rate to 0 because baud_rate/serial connection is used by tuyamcu
   uart_tx_pin: GPIO1
   uart_rx_pin: GPIO3
 
@@ -22,10 +23,6 @@ light:
     switch_datapoint: 1
     min_value: 10
     max_value: 1000
-
-# disable serial logging by setting baud_rate to 0 because baud_rate/serial connection is used by tuyamcu
-logger:
-  baud_rate: 0
 
 tuya:
 

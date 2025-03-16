@@ -1,8 +1,3 @@
-# Sensorbox v2 config for PCB SBR1
-# config r2 (20241130)
-# https://go.toms3d.org/sbr1
-# Leave the "substitutions" block in place, then add this config.
-# You can choose a new "friendly name" in the substitutions, this will be its display name in Home Assistant.
 ---
 substitutions:
   name: standard-air-sensor
@@ -11,4 +6,7 @@ substitutions:
   display_heading_1: "Farticles"
 
 packages:
-  standard_air_sensor: !include devices/air-sensor-v2-pms5003.yaml
+  air_sensor: !include devices/air-sensor-v2-pms5003.yaml
+
+esphome:
+  area: 'study'

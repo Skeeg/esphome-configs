@@ -5,4 +5,7 @@ substitutions:
   ip_address: 10.3.2.16
 
 packages:
-  family-fan: !include devices/maxcio-switch-as-fan.yaml
+  fan: !include devices/maxcio-switch-as-fan.yaml
+
+esphome:
+  area: 'main'

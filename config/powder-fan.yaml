@@ -5,4 +5,7 @@ substitutions:
   ip_address: 10.3.2.18
 
 packages:
-  powder-fan: !include devices/maxcio-switch-as-fan.yaml
+  fan: !include devices/maxcio-switch-as-fan.yaml
+
+esphome:
+  area: 'bathroom'

@@ -1,16 +1,16 @@
 ---
 substitutions:
-  physical_button_pin: GPIO1
-  sel_pin: GPIO12
-  cf_pin: GPIO4
-  cf1_pin: GPIO5
-  relay_pin: GPIO14
+  esp8266_board: esp12e
+  physical_button_pin: GPIO0
+  relay_pin: GPIO12
   status_led_pin: GPIO13
-  voltage_divider: "2351"
-  current_resistor: "0.001"
-  current_multiply: "1.0"
-  esp8266_board: esp01_1m
   relay_restore_mode: ALWAYS_ON # Powering the relay may cause damage or instability when the programmer is supplying Vcc.
+  current_multiply: "1.0"
+  current_resistor: "0.001"
+  voltage_divider: "2351"
+  logger_baud_rate: "0" # disable serial logging by setting baud_rate to 0 because baud_rate/serial connection is used by cse7766
+  global_logging_level: INFO # VERBOSE will spamming the cse7766 sensor
+  sensor_logging_level: INFO # VERBOSE will spamming the cse7766 sensor
 
 packages:
   api: !include ../common/api.yaml
@@ -34,49 +34,41 @@ binary_sensor:
     on_press:
       - switch.toggle: relay
 
+preferences:
+  flash_write_interval: 5min
+
 sensor:
-  - platform: hlw8012
-    current_resistor: ${current_resistor}
-    voltage_divider: ${voltage_divider}
-    sel_pin: ${sel_pin}
-    cf_pin: ${cf_pin}
-    cf1_pin: ${cf1_pin}
-    update_interval: 30s
-    initial_mode: voltage
-    change_mode_every: 8
+  - platform: cse7766
     current:
       name: "${friendly_name} Current"
       accuracy_decimals: 2
       filters:
-        - throttle_average: 30s
-        - multiply: ${current_multiply}
+        - throttle_average: 60s
     voltage:
       name: "${friendly_name} Voltage"
       accuracy_decimals: 2
       filters:
-        - throttle_average: 30s
+        - throttle_average: 60s
     power:
       name: "${friendly_name} Power"
       accuracy_decimals: 2
       id: my_power
       filters:
-        - throttle_average: 30s
+        - throttle_average: 60s
     energy:
       name: "${friendly_name} Energy"
       accuracy_decimals: 2
       filters:
-        - throttle: 30s
-        - multiply: 0.001
-      unit_of_measurement: kWh
-    # apparent_power: #(not available for hlw8012)
-    #   name: "${friendly_name} Apparent Power"
-    #   filters:
-    #     - throttle_average: 60s
-    # power_factor: #(not available for hlw8012)
-    #   name: "${friendly_name} Power Factor"
-    #   accuracy_decimals: 2
-    #   filters:
-    #     - throttle_average: 60s
+        - throttle: 60s
+    apparent_power: #(only available with version 2024.3.0 or greater)
+      name: "${friendly_name} Apparent Power"
+      filters:
+        - throttle_average: 60s
+    power_factor: #(only available with version 2024.3.0 or greater)
+      name: "${friendly_name} Power Factor"
+      accuracy_decimals: 2
+      filters:
+        - throttle_average: 60s
 
   # - platform: total_daily_energy #(Optional, not specific to cse7766)
   #   name: "${friendly_name} Daily Energy"
@@ -104,4 +96,9 @@ switch:
     name: "${friendly_name}"
     pin: ${relay_pin}
     id: relay
-    restore_mode: ${relay_restore_mode}
+    restore_mode: ${relay_restore_mode} 
+
+uart:
+  rx_pin: RX
+  baud_rate: 4800
+  parity: EVEN
