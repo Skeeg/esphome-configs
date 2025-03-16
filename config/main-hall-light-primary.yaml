@@ -1,0 +1,15 @@
+---
+substitutions:
+  name: main-hall-lights
+  friendly_name: Main Hall Lights
+  ip_address: 10.3.2.33
+  hass_entity_to_control1: main_hall_secondary_main_hall_secondary
+  hass_service_to_control1: light
+  hass_entity_to_control2: main_hall_tertiary_main_hall_tertiary
+  hass_service_to_control2: light
+
+packages:
+  switch: !include devices/3way-gosund-ks-602s-as-light.yaml
+
+esphome:
+  area: 'main'

@@ -1,11 +1,11 @@
 ---
 substitutions:
-  name: main-hall-secondary
-  friendly_name: Main Hall Secondary
-  ip_address: 10.3.2.35
+  name: main-hall-tertiary
+  friendly_name: Main Hall Tertiary
+  ip_address: 10.3.2.40
   hass_entity_to_control1: main_hall_lights_main_hall_lights
   hass_service_to_control1: light
-  hass_entity_to_control2: main_hall_tertiary_main_hall_tertiary
+  hass_entity_to_control2: main_hall_secondary_main_hall_secondary
   hass_service_to_control2: light
   relay_pin: GPIO4 # Black hole, this is just a control switch.  Don't need the relay "clicking" on.
 
