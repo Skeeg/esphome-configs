@@ -1,0 +1,11 @@
+---
+substitutions:
+  name: unused-f9
+  friendly_name: Unused F9
+  ip_address: 10.3.2.62
+
+packages:
+  power-monitor: !include devices/sonoff-s31.yaml
+
+# esphome:
+#   area: 'office'

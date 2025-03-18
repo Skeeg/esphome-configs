@@ -1,0 +1,11 @@
+---
+substitutions:
+  name: basement-lights
+  friendly_name: Basement Lights
+  ip_address: 10.3.2.75
+
+packages:
+  light: !include devices/maxcio-switch-light.yaml
+
+esphome:
+  area: 'basement'

@@ -1,0 +1,11 @@
+---
+substitutions:
+  name: unused-2a
+  friendly_name: Unused 2A
+  ip_address: 10.3.2.47
+
+packages:
+  power-monitor: !include devices/sonoff-s31.yaml
+
+# esphome:
+#   area: 'office'

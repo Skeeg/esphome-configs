@@ -1,0 +1,11 @@
+---
+substitutions:
+  name: unused-b7
+  friendly_name: Unused B7
+  ip_address: 10.3.2.45
+
+packages:
+  power-monitor: !include devices/sonoff-s31.yaml
+
+# esphome:
+#   area: 'office'

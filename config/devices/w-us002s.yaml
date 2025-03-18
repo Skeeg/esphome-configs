@@ -1,3 +1,5 @@
+# Review https://devices.esphome.io/devices/BlitzWolf-BW-SHP2-Power-Monitoring-Plug
+
 ---
 substitutions:
   physical_button_pin: GPIO1
@@ -5,10 +7,14 @@ substitutions:
   cf_pin: GPIO4
   cf1_pin: GPIO5
   relay_pin: GPIO14
-  status_led_pin: GPIO13
-  voltage_divider: "2351"
-  current_resistor: "0.001"
-  current_multiply: "1.0"
+  green_led_pin: GPIO3 #WiFi LED
+  blue_led_pin: GPIO13 #Button LED
+  voltage_divider: "2069.986759838176" #Calibrated on 2025-03-16 on ec:fa:bc:89:a8:b3
+  current_resistor: "0.002372161940866017" #New values via calculator at https://esphome.io/components/sensor/hlw8012.html
+  current_multiply: "1.007049880556328"
+  # current_multiply: "1.0" # Defaults from HLW8012
+  # current_resistor: "0.001" # Defaults from HLW8012
+  # voltage_divider: "2351" # Defaults from HLW8012
   esp8266_board: esp01_1m
   relay_restore_mode: ALWAYS_ON # Powering the relay may cause damage or instability when the programmer is supplying Vcc.
 
@@ -34,6 +40,13 @@ binary_sensor:
     on_press:
       - switch.toggle: relay
 
+output:
+- platform: esp8266_pwm
+  id: blue_led
+  pin:
+    number: ${blue_led_pin}
+    inverted: True
+
 sensor:
   - platform: hlw8012
     current_resistor: ${current_resistor}
@@ -41,26 +54,47 @@ sensor:
     sel_pin: ${sel_pin}
     cf_pin: ${cf_pin}
     cf1_pin: ${cf1_pin}
-    update_interval: 30s
     initial_mode: voltage
-    change_mode_every: 8
+    change_mode_every: 3
+    update_interval: 3s
     current:
       name: "${friendly_name} Current"
       accuracy_decimals: 2
       filters:
         - throttle_average: 30s
         - multiply: ${current_multiply}
+        # - calibrate_linear: # From https://esphome.io/components/sensor/index.html#calibrate-linear
+        #   - 0.0 -> 0.013
+        #   - 0.08208 -> 0.071
+        #   - 1.34223 -> 1.066
+        #   - 5.57170 -> 4.408
+        #   - 6.69184 -> 5.259
+        #   - 6.97187 -> 5.540
     voltage:
       name: "${friendly_name} Voltage"
       accuracy_decimals: 2
       filters:
         - throttle_average: 30s
+        # # Map from sensor -> measured value
+        # - calibrate_linear: # From https://esphome.io/components/sensor/index.html#calibrate-linear
+        #     - 0.0 -> 0.0
+        #     - 602.87506 -> 229.9
+        #     - 609.8 -> 232.8
     power:
       name: "${friendly_name} Power"
       accuracy_decimals: 2
       id: my_power
       filters:
         - throttle_average: 30s
+          # - calibrate_linear: # From https://esphome.io/components/sensor/index.html#calibrate-linear
+          #   - 0.0 -> 1.14
+          #   - 62.06167 -> 10.93
+          #   - 1503.27161 -> 247.6
+          #   - 1599.81213 -> 263.7
+          #   - 3923.67700 -> 631.4
+          #   - 7109.50928 -> 1148.0
+          #   - 7237.0857 -> 1193.0
+          #   - 7426.71338 -> 1217.0
     energy:
       name: "${friendly_name} Energy"
       accuracy_decimals: 2
@@ -68,20 +102,6 @@ sensor:
         - throttle: 30s
         - multiply: 0.001
       unit_of_measurement: kWh
-    # apparent_power: #(not available for hlw8012)
-    #   name: "${friendly_name} Apparent Power"
-    #   filters:
-    #     - throttle_average: 60s
-    # power_factor: #(not available for hlw8012)
-    #   name: "${friendly_name} Power Factor"
-    #   accuracy_decimals: 2
-    #   filters:
-    #     - throttle_average: 60s
-
-  # - platform: total_daily_energy #(Optional, not specific to cse7766)
-  #   name: "${friendly_name} Daily Energy"
-  #   power_id: my_power
-  #   accuracy_decimals: 2
 
   - platform: integration
     name: 'Total Energy'
@@ -96,7 +116,7 @@ sensor:
 
 status_led:
   pin:
-    number: ${status_led_pin}
+    number: ${green_led_pin}
     inverted: True
 
 switch:

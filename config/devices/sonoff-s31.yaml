@@ -5,9 +5,6 @@ substitutions:
   relay_pin: GPIO12
   status_led_pin: GPIO13
   relay_restore_mode: ALWAYS_ON # Powering the relay may cause damage or instability when the programmer is supplying Vcc.
-  current_multiply: "1.0"
-  current_resistor: "0.001"
-  voltage_divider: "2351"
   logger_baud_rate: "0" # disable serial logging by setting baud_rate to 0 because baud_rate/serial connection is used by cse7766
   global_logging_level: INFO # VERBOSE will spamming the cse7766 sensor
   sensor_logging_level: INFO # VERBOSE will spamming the cse7766 sensor
@@ -69,11 +66,6 @@ sensor:
       accuracy_decimals: 2
       filters:
         - throttle_average: 60s
-
-  # - platform: total_daily_energy #(Optional, not specific to cse7766)
-  #   name: "${friendly_name} Daily Energy"
-  #   power_id: my_power
-  #   accuracy_decimals: 2
 
   - platform: integration
     name: 'Total Energy'

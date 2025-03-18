@@ -1,0 +1,11 @@
+---
+substitutions:
+  name: cold-storage-light
+  friendly_name: Cold Storage Lights
+  ip_address: 10.3.2.74
+
+packages:
+  switch: !include devices/gosund-ks-602s-as-light.yaml
+
+esphome:
+  area: 'cold storage'
