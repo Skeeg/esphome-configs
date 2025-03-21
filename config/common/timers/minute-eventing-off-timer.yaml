@@ -1,12 +1,12 @@
 substitutions:
   off_timer_scope: switch
-  off_timer_device: relay
+  off_timer_device: relay_1
   off_timer_seconds: "0"
   off_timer_minutes: "/15"
 
 time:
   - platform: sntp
-    # ...
+    timezone: !secret time_zone
     on_time:
       - seconds: ${off_timer_seconds}
         minutes: ${off_timer_minutes}

@@ -1,7 +1,7 @@
 ---
 substitutions:
-  name: unused-75
-  friendly_name: Unused 75
+  name: study-desk
+  friendly_name: Study Desk
   ip_address: 10.3.2.56
   voltage_divider: "2069.986759838176" #Calibrated on 2025-03-16
   current_resistor: "0.002372161940866017" #New values via calculator at https://esphome.io/components/sensor/hlw8012.html
@@ -10,5 +10,5 @@ substitutions:
 packages:
   power-monitor: !include devices/w-us002s.yaml
 
-# esphome:
-#   area: 'office'
+esphome:
+  area: 'study'

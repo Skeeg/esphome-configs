@@ -183,8 +183,8 @@ display:
       ;
       ;
       // SELECT BEST AVAILABLE TEMPERATURE SENSOR
-      float temps[4] = {id(temp_aht20).state, id(temp_scd40).state, id(temp_aht20_ens).state, id(temp_bmp280).state};
-      float hums[3] = {id(hum_aht20).state, id(hum_scd40).state, id(hum_aht20_ens).state};
+      float temps[5] = {id(temp_sht41).state, id(temp_aht20).state, id(temp_scd40).state, id(temp_aht20_ens).state, id(temp_bmp280).state};
+      float hums[4] = {id(hum_sht41).state, id(hum_aht20).state, id(hum_scd40).state, id(hum_aht20_ens).state};
       float temp = 0;
       float hum = 0;
       for(int i = 0; i < 5; i++){
@@ -457,6 +457,17 @@ sensor:
       name: "SCD40 Humidity"
       id: hum_scd40
     update_interval: 30s
+
+  - platform: sht4x
+    #addr 0x44
+    i2c_id: i2c_main
+    temperature:
+      name: "SHT41 Temperature"
+      id: temp_sht41
+    humidity:
+      name: "SHT41 Relative Humidity"
+      id: hum_sht41
+    update_interval: 10s
 
   - platform: ens160_i2c
     address: 0x53

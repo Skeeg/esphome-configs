@@ -38,7 +38,7 @@ binary_sensor:
     internal: true
     name: Button
     on_press:
-      - switch.toggle: relay
+      - switch.toggle: relay_1
 
 output:
 - platform: esp8266_pwm
@@ -58,7 +58,7 @@ sensor:
     change_mode_every: 3
     update_interval: 3s
     current:
-      name: "${friendly_name} Current"
+      name: "Current"
       accuracy_decimals: 2
       filters:
         - throttle_average: 30s
@@ -71,7 +71,7 @@ sensor:
         #   - 6.69184 -> 5.259
         #   - 6.97187 -> 5.540
     voltage:
-      name: "${friendly_name} Voltage"
+      name: "Voltage"
       accuracy_decimals: 2
       filters:
         - throttle_average: 30s
@@ -81,7 +81,7 @@ sensor:
         #     - 602.87506 -> 229.9
         #     - 609.8 -> 232.8
     power:
-      name: "${friendly_name} Power"
+      name: "Power"
       accuracy_decimals: 2
       id: my_power
       filters:
@@ -96,7 +96,7 @@ sensor:
           #   - 7237.0857 -> 1193.0
           #   - 7426.71338 -> 1217.0
     energy:
-      name: "${friendly_name} Energy"
+      name: "Energy"
       accuracy_decimals: 2
       filters:
         - throttle: 30s
@@ -123,5 +123,5 @@ switch:
   - platform: gpio
     name: "${friendly_name}"
     pin: ${relay_pin}
-    id: relay
+    id: relay_1
     restore_mode: ${relay_restore_mode}

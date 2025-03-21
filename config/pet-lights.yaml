@@ -3,14 +3,10 @@ substitutions:
   name: pet-lights
   friendly_name: Pet Lights
   ip_address: 10.3.2.41
-  # global_logging_level: DEBUG # VERBOSE will spamming the cse7766 sensor
-  # sensor_logging_level: DEBUG # VERBOSE will spamming the cse7766 sensor
-  decoration_timer_scope: switch
-  decoration_timer_device: relay
 
 packages:
   power-monitor: !include devices/sonoff-s31.yaml
-  daily-timer: !include common/timers/decorations.yaml
+  daily-timer: !include common/timers/daily-timer.yaml
 
 esphome:
   area: 'austins room'

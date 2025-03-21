@@ -9,6 +9,7 @@ substitutions:
 
 packages:
   power-monitor: !include devices/w-us002s.yaml
+  daily-timer: !include common/timers/daily-timer.yaml
 
 esphome:
   area: 'main'

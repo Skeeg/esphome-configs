@@ -28,7 +28,7 @@ binary_sensor:
       inverted: True
     internal: true
     on_press:
-      - switch.toggle: relay
+      - switch.toggle: relay_1
   - platform: binary
     id: light_1
     name: None
@@ -57,7 +57,7 @@ switch:
   - platform: gpio
     name: "Sonoff Basic Relay"
     pin: ${relay_pin}
-    id: relay
+    id: relay_1
     on_turn_off:
       - light.turn_off: blue_led
     on_turn_on:
