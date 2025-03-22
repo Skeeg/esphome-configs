@@ -26,6 +26,7 @@ substitutions:
   display_heading_1: "Particles"
   display_heading_2: "CO2"
   display_heading_3: "VOC"
+  display_data_rate: 80MHz
 
 packages:
   api: !include ../common/api.yaml
@@ -86,6 +87,8 @@ debug:
 display:
   - platform: ili9xxx    
     model: ILI9341
+    update_interval: 5s
+    data_rate: ${display_data_rate} #Reduces delay in display updates, component still taking ~90ms. 
     cs_pin: ${display_cs_pin}
     dc_pin: ${display_dc_pin}
     reset_pin: ${display_reset_pin}
@@ -183,7 +186,7 @@ display:
       ;
       ;
       // SELECT BEST AVAILABLE TEMPERATURE SENSOR
-      float temps[5] = {id(temp_sht41).state, id(temp_aht20).state, id(temp_scd40).state, id(temp_aht20_ens).state, id(temp_bmp280).state};
+      float temps[5] = {id(temp_sht41_f).state, id(temp_aht20_f).state, id(temp_scd40_f).state, id(temp_aht20_ens_f).state, id(temp_bmp280_f).state};
       float hums[4] = {id(hum_sht41).state, id(hum_aht20).state, id(hum_scd40).state, id(hum_aht20_ens).state};
       float temp = 0;
       float hum = 0;
@@ -195,7 +198,7 @@ display:
       }
       ;
       // DRAW HUMITEMP
-      it.printf(90, 30, fl14, id(grey), TextAlign::BOTTOM_LEFT, "°C");
+      it.printf(90, 30, fl14, id(grey), TextAlign::BOTTOM_LEFT, "°F");
       it.printf(90, 34, fv30, white, display::TextAlign::BOTTOM_RIGHT, "%.1f", temp);
       it.printf(197, 18, fl14, id(grey), TextAlign::BOTTOM_LEFT, "RH");
       it.print(197, 30, fl14, id(grey), TextAlign::BOTTOM_LEFT, "\%");
@@ -410,6 +413,11 @@ light:
     id: back_light
     restore_mode: ALWAYS_ON
 
+# Mask the component delay log messages that the display takes too long.  Of course it does, it's a slow display and a slow microcontroller with a large lambda.
+logger:
+  logs:
+    component: ERROR
+
 output:
   - platform: ledc
     pin: ${backlight_pin}
@@ -425,10 +433,17 @@ sensor:
     variant: AHT20
     temperature:
       name: "AHT20 Temperature"
-      id: temp_aht20
+      id: temp_aht20_c
     humidity:
       name: "AHT20 Humidity"
       id: hum_aht20
+    update_interval: 10s
+
+  - platform: template
+    name: AHT20 Temperature_F
+    id: temp_aht20_f
+    internal: True
+    lambda: return id(temp_aht20_c).state * 9/5+32;
     update_interval: 10s
 
   - platform: bmp280_i2c
@@ -436,11 +451,18 @@ sensor:
     i2c_id: i2c_main
     temperature:
       name: "BMP280 Temperature"
-      id: temp_bmp280
+      id: temp_bmp280_c
       oversampling: 16x
     pressure:
       name: "BMP280 Pressure"
       id: pres_bmp280
+    update_interval: 10s
+
+  - platform: template
+    name: BMP280 Temperature_F
+    id: temp_bmp280_f
+    lambda: return id(temp_bmp280_c).state * 9/5+32;
+    internal: True
     update_interval: 10s
 
   - platform: scd4x
@@ -451,10 +473,17 @@ sensor:
       id: co2_scd40
     temperature:
       name: "SCD40 Temperature"
-      id: temp_scd40
+      id: temp_scd40_c
     humidity:
       name: "SCD40 Humidity"
       id: hum_scd40
+    update_interval: 30s
+
+  - platform: template
+    name: SCD40 Temperature_F
+    id: temp_scd40_f
+    lambda: return id(temp_scd40_c).state * 9/5+32;
+    internal: True
     update_interval: 30s
 
   - platform: sht4x
@@ -462,10 +491,17 @@ sensor:
     i2c_id: i2c_main
     temperature:
       name: "SHT41 Temperature"
-      id: temp_sht41
+      id: temp_sht41_c
     humidity:
       name: "SHT41 Relative Humidity"
       id: hum_sht41
+    update_interval: 10s
+
+  - platform: template
+    name: SHT41 Temperature_F
+    id: temp_sht41_f
+    lambda: return id(temp_sht41_f).state * 9/5+32;
+    internal: True
     update_interval: 10s
 
   - platform: ens160_i2c
@@ -486,7 +522,7 @@ sensor:
       id: aqi_ens160
     update_interval: 10s
     compensation:
-      temperature: temp_aht20_ens
+      temperature: temp_aht20_ens_c
       humidity: hum_aht20_ens
 
   - platform: aht10
@@ -495,12 +531,19 @@ sensor:
     variant: AHT20
     temperature:
       name: "AHT20/ENS160 Temperature"
-      id: temp_aht20_ens
+      id: temp_aht20_ens_c
       disabled_by_default: True
     humidity:
       name: "AHT20/ENS160 Humidity"
       id: hum_aht20_ens
       disabled_by_default: True
+    update_interval: 10s
+
+  - platform: template
+    name: AHT20/ENS160 Temperature_F
+    id: temp_aht20_ens_f
+    lambda: return id(temp_aht20_ens_f).state * 9/5+32;
+    internal: True
     update_interval: 10s
 
   - platform: sgp30
@@ -526,7 +569,7 @@ sensor:
     update_interval: 5s
     compensation: 
       humidity_source: hum_aht20
-      temperature_source: temp_aht20
+      temperature_source: temp_aht20_c
 
   - platform: pmsx003
     type: PMSX003
@@ -545,7 +588,7 @@ sensor:
 spi:
   clk_pin: ${spi_clk_pin}
   mosi_pin: ${spi_mosi_pin}
-  miso_pin: ${spi_miso_pin}
+  # miso_pin: ${spi_miso_pin} # http://esphome.io/components/display/ili9xxx.html#configuration-variables Not needed if spi is not used for reading data
 
 uart:
   - tx_pin: ${uart_pms_tx_pin}

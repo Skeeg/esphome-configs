@@ -1,12 +1,12 @@
 ---
 substitutions:
-  name: standard-air-sensor
-  friendly_name: Standard Air Sensor
-  ip_address: 10.3.2.23
+  name: garage-air-sensor
+  friendly_name: Garage Air Sensor
+  ip_address: 10.3.2.76
   display_heading_1: "Farticles"
 
 packages:
   air_sensor: !include devices/air-sensor-v2-pms5003.yaml
 
 esphome:
-  area: 'study'
+  area: 'garage'
