@@ -1,0 +1,11 @@
+---
+substitutions:
+  name: unused-bb
+  friendly_name: Unused BB
+  ip_address: 10.3.2.95
+
+packages:
+  switch: !include devices/sonoff-basic-r2-switch.yaml
+
+# esphome:
+#   area: 'office'

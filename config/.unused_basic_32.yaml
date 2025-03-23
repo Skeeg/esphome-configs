@@ -1,0 +1,11 @@
+---
+substitutions:
+  name: unused-32
+  friendly_name: Unused 32
+  ip_address: 10.3.2.94
+
+packages:
+  switch: !include devices/sonoff-basic-r2-switch.yaml
+
+# esphome:
+#   area: 'office'
