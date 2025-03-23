@@ -1,8 +1,15 @@
+# Basic Config
 ---
 substitutions:
-  esp8266_board: d1_mini
-  i2c_scl_pin: D1
-  i2c_sda_pin: D2
+  esp8266_board: esp01_1m
+  physical_button_pin: GPIO0
+  relay_pin: GPIO12
+  status_led_pin: GPIO13
+  device_class: light
+  button_as_internal: "true"
+  i2c_scl: GPIO1
+  i2c_sda: GPIO3
+  logger_baud_rate: "0"
 
 packages:
   api: !include ../common/api.yaml
@@ -15,11 +22,50 @@ packages:
   web: !include ../common/web-server.yaml
   wifi: !include ../common/wifi.yaml
 
+${device_class}:
+  - platform: binary
+    id: ${device_class}_1
+    name: None
+    on_turn_off:
+      - light.turn_off: blue_led
+    on_turn_on:
+      - light.turn_on: blue_led
+    output: relay_1
+    restore_mode: ALWAYS_OFF
+
+binary_sensor:
+  - platform: gpio
+    id: button_1
+    name: "Button"
+    pin:
+      number: ${physical_button_pin}
+      mode: INPUT_PULLUP
+      inverted: True
+    internal: ${button_as_internal}
+    on_press:
+      - ${device_class}.toggle: ${device_class}_1
+
 i2c:
-  - scl: ${i2c_scl_pin}
-    sda: ${i2c_sda_pin}
+  - scl: ${i2c_scl}
+    sda: ${i2c_sda}
     scan: true
     id: i2c_main
+
+light:
+  - platform: status_led
+    disabled_by_default: true
+    id: blue_led
+    internal: true
+    name: "Status LED"
+    pin:
+      inverted: true
+      number: ${status_led_pin}
+
+output:
+  # The relay switches on the red side of the LED when active.
+  - platform: gpio
+    pin: ${relay_pin}
+    id: relay_1
 
 sensor:
   - platform: bme280_i2c
