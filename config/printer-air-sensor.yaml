@@ -6,7 +6,7 @@ substitutions:
   display_heading_1: "Farticles"
 
 packages:
-  advanced_air_sensor: !include devices/air-sensor-v2-pms5003s.yaml
+  advanced_air_sensor: !include devices/air-sensor-v2-pms5003s.yaml #Formaldehyde sensor
 
 esphome:
   area: 'office'

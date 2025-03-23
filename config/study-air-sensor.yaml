@@ -4,6 +4,7 @@ substitutions:
   friendly_name: Study Air Sensor
   ip_address: 10.3.2.23
   display_heading_1: "Farticles"
+  display_data_rate: 20Mhz #This hardware is having issues at 80Mhz
 
 packages:
   air_sensor: !include devices/air-sensor-v2-pms5003.yaml
