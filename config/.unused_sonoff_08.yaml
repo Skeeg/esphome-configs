@@ -1,8 +1,8 @@
 ---
 substitutions:
-  name: unused-b7
-  friendly_name: Unused B7
-  ip_address: 10.3.2.45
+  name: unused-08
+  friendly_name: Unused 08
+  ip_address: 10.3.2.82
 
 packages:
   power-monitor: !include devices/sonoff-s31-power-monitor.yaml

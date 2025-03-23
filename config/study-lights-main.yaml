@@ -7,7 +7,7 @@ substitutions:
   # hass_entity_to_control1: main_hall_second_main_hall_secondary
 
 packages:
-  light: !include devices/3way-maxcio-switch-as-light.yaml
+  light: !include devices/3way-maxcio-light-switch.yaml
 
 esphome:
   area: 'study'

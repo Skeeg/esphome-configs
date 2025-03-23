@@ -8,7 +8,7 @@ substitutions:
   off_timer_minutes: "/15"
 
 packages:
-  switch: !include devices/gosund-ks-602s-as-light.yaml
+  switch: !include devices/gosund-ks-602s-light-switch.yaml
   15-minute-off: !include common/timers/minute-eventing-off-timer.yaml
 
 esphome:

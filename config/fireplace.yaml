@@ -6,7 +6,7 @@ substitutions:
   mdi_icon: mdi:fire
 
 packages:
-  fireplace: !include devices/sonoff-basic-r2-as-switch-custom.yaml
+  fireplace: !include devices/sonoff-basic-r2-switch-mdi.yaml
 
 esphome:
   area: 'main'

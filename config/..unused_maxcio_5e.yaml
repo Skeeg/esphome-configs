@@ -9,7 +9,7 @@ substitutions:
   current_multiply: "1.007049880556328"
 
 packages:
-  power-monitor: !include devices/w-us002s.yaml
+  power-monitor: !include devices/w-us002s-power-monitor.yaml
 
 # esphome:
 #   area: 'office'

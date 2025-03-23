@@ -27,6 +27,7 @@ substitutions:
   display_heading_2: "CO2"
   display_heading_3: "VOC"
   display_data_rate: 80MHz
+  button_as_internal: "true"
 
 packages:
   api: !include ../common/api.yaml
@@ -48,6 +49,7 @@ binary_sensor:
         pullup: true
       inverted: true
     id: top_btn
+    internal: ${button_as_internal}
     filters:
       - delayed_on: 10ms
       - delayed_off: 500ms

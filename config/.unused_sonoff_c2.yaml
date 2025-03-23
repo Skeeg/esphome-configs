@@ -5,7 +5,7 @@ substitutions:
   ip_address: 10.3.2.50
 
 packages:
-  power-monitor: !include devices/sonoff-s31.yaml
+  power-monitor: !include devices/sonoff-s31-power-monitor.yaml
 
 # esphome:
 #   area: 'office'

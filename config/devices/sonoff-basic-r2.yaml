@@ -5,6 +5,8 @@ substitutions:
   physical_button_pin: GPIO0
   relay_pin: GPIO12
   status_led_pin: GPIO13
+  device_class: light
+  button_as_internal: "true"
 
 packages:
   api: !include ../common/api.yaml
@@ -17,7 +19,6 @@ packages:
   web: !include ../common/web-server.yaml
   wifi: !include ../common/wifi.yaml
 
-# Device Specific Config
 binary_sensor:
   - platform: gpio
     id: button_1
@@ -26,39 +27,33 @@ binary_sensor:
       number: ${physical_button_pin}
       mode: INPUT_PULLUP
       inverted: True
-    internal: true
+    internal: ${button_as_internal}
     on_press:
-      - switch.toggle: relay_1
+      - ${device_class}.toggle: ${device_class}_1
+
+${device_class}:
   - platform: binary
-    id: light_1
+    id: ${device_class}_1
     name: None
     on_turn_off:
-    - light.turn_off: status_1
+      - light.turn_off: blue_led
     on_turn_on:
-    - light.turn_on: status_1
+      - light.turn_on: blue_led
     output: relay_1
     restore_mode: ALWAYS_OFF
 
 light:
   - platform: status_led
+    disabled_by_default: true
     id: blue_led
-    internal: True
+    internal: true
+    name: "Status LED"
     pin:
+      inverted: true
       number: ${status_led_pin}
-      inverted: True
 
 output:
-  - platform: gpio
-    id: relay_1
-    pin: ${relay_pin}
-
-switch:
   # The relay switches on the red side of the LED when active.
   - platform: gpio
-    name: "Sonoff Basic Relay"
     pin: ${relay_pin}
     id: relay_1
-    on_turn_off:
-      - light.turn_off: blue_led
-    on_turn_on:
-      - light.turn_on: blue_led

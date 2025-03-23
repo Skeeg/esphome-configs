@@ -3,9 +3,10 @@ substitutions:
   name: powder-fan
   friendly_name: Powder Fan
   ip_address: 10.3.2.18
+  device_class: fan
 
 packages:
-  fan: !include devices/maxcio-switch-as-fan.yaml
+  fan: !include devices/maxcio-light-switch.yaml
 
 esphome:
   area: 'bathroom'

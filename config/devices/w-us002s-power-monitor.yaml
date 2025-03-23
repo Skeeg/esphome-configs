@@ -17,6 +17,7 @@ substitutions:
   # voltage_divider: "2351" # Defaults from HLW8012
   esp8266_board: esp01_1m
   relay_restore_mode: ALWAYS_ON # Powering the relay may cause damage or instability when the programmer is supplying Vcc.
+  button_as_internal: "true"
 
 packages:
   api: !include ../common/api.yaml
@@ -35,7 +36,7 @@ binary_sensor:
       number: ${physical_button_pin}
       mode: INPUT_PULLUP
       inverted: True
-    internal: true
+    internal: ${button_as_internal}
     name: Button
     on_press:
       - switch.toggle: relay_1

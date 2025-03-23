@@ -1,16 +1,13 @@
 ---
 substitutions:
   name: main-hall-tertiary
-  friendly_name: Main Hall Tertiary
+  friendly_name: Control Main Hall Tertiary
   ip_address: 10.3.2.40
-  hass_entity_to_control1: main_hall_lights_main_hall_lights
-  hass_service_to_control1: light
-  hass_entity_to_control2: main_hall_secondary_main_hall_secondary
-  hass_service_to_control2: light
+  hass_event_name: esphome.3way_main_hall_lights_button
   relay_pin: GPIO4 # Black hole, this is just a control switch.  Don't need the relay "clicking" on.
 
 packages:
-  switch: !include devices/3way-gosund-ks-602s-as-light.yaml
+  switch: !include devices/3way-gosund-ks-602s-light-switch.yaml
 
 esphome:
   area: 'main'
