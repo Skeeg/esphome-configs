@@ -3,8 +3,7 @@ substitutions:
   name: study-lights
   friendly_name: Study Lights
   ip_address: 10.3.2.36
-  # hass_service_to_control1: switch
-  # hass_entity_to_control1: main_hall_second_main_hall_secondary
+  hass_event_name: esphome.3way_study_lights_button
 
 packages:
   light: !include devices/3way-maxcio-light-switch.yaml
