@@ -1,0 +1,10 @@
+substitutions:
+  ip_address: 10.3.2.121
+  name: austins-dimmer
+  friendly_name: Austins Dimmer
+
+packages:
+  feit_dimmer_esp8266: !include devices/feit-dimmer-esp8266.yaml
+
+esphome:
+  area: 'austin'
