@@ -16,7 +16,7 @@ substitutions:
   # current_resistor: "0.001" # Defaults from HLW8012
   # voltage_divider: "2351" # Defaults from HLW8012
   esp8266_board: esp01_1m
-  relay_restore_mode: ALWAYS_ON # Powering the relay may cause damage or instability when the programmer is supplying Vcc.
+  device_restore_mode: "ALWAYS_ON" # Powering the relay may cause damage or instability when the programmer is supplying Vcc.
   button_as_internal: "true"
 
 packages:
@@ -125,4 +125,4 @@ switch:
     name: "${friendly_name}"
     pin: ${relay_pin}
     id: relay_1
-    restore_mode: ${relay_restore_mode}
+    restore_mode: ${device_restore_mode}

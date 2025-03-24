@@ -13,6 +13,7 @@ substitutions:
   hass_event_name: esphome.${name}_button_pressed
   device_class: light
   button_as_internal: "true"
+  device_restore_mode: "ALWAYS_OFF"
 
 packages:
   api: !include ../common/api.yaml
@@ -64,7 +65,7 @@ ${device_class}:
     on_turn_off:
       - light.turn_off: status_1
     output: relay_1
-    restore_mode: ALWAYS_OFF
+    restore_mode: ${device_restore_mode}
 
 output:
   - platform: gpio

@@ -28,6 +28,7 @@ substitutions:
   display_heading_3: "VOC"
   display_data_rate: 80MHz
   button_as_internal: "true"
+  device_restore_mode: "ALWAYS_ON"
 
 packages:
   api: !include ../common/api.yaml
@@ -413,7 +414,7 @@ light:
     output: backlight_pwm
     name: "Display Backlight"
     id: back_light
-    restore_mode: ALWAYS_ON
+    restore_mode: ${device_restore_mode}
 
 # Mask the component delay log messages that the display takes too long.  Of course it does, it's a slow display and a slow microcontroller with a large lambda.
 logger:

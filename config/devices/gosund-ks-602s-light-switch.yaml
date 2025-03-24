@@ -12,6 +12,7 @@ substitutions:
   status_led_transition_length: 0ms
   device_class: light
   button_as_internal: "true"
+  device_restore_mode: "ALWAYS_OFF"
 
 packages:
   api: !include ../common/api.yaml
@@ -54,7 +55,7 @@ ${device_class}:
     on_turn_on:
       - light.turn_on: status_1
     output: relay_1
-    restore_mode: ALWAYS_OFF
+    restore_mode: ${device_restore_mode}
 
 output:
   - platform: gpio

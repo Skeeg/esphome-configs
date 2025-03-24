@@ -4,7 +4,7 @@ substitutions:
   physical_button_pin: GPIO0
   relay_pin: GPIO12
   status_led_pin: GPIO13
-  relay_restore_mode: ALWAYS_ON # Powering the relay may cause damage or instability when the programmer is supplying Vcc.
+  device_restore_mode: "ALWAYS_ON" # Powering the relay may cause damage or instability when the programmer is supplying Vcc.
   logger_baud_rate: "0" # disable serial logging by setting baud_rate to 0 because baud_rate/serial connection is used by cse7766
   global_logging_level: INFO # VERBOSE will spamming the cse7766 sensor
   sensor_logging_level: INFO # VERBOSE will spamming the cse7766 sensor
@@ -89,7 +89,7 @@ switch:
     name: "${friendly_name}"
     pin: ${relay_pin}
     id: relay_1
-    restore_mode: ${relay_restore_mode} 
+    restore_mode: ${device_restore_mode} 
 
 uart:
   rx_pin: RX
