@@ -122,7 +122,7 @@ status_led:
 
 switch:
   - platform: gpio
-    name: "${friendly_name}"
+    name: None
     pin: ${relay_pin}
     id: relay_1
     restore_mode: ${device_restore_mode}
