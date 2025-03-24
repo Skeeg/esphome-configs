@@ -1,0 +1,11 @@
+---
+substitutions:
+  name: powder-lights
+  friendly_name: Powder Lights
+  ip_address: 10.3.2.109
+
+packages:
+  light: !include devices/maxcio-light-switch.yaml
+
+esphome:
+  area: 'powder bathroom'

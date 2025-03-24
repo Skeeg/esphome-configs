@@ -1,0 +1,11 @@
+---
+substitutions:
+  name: exterior-garage-lights
+  friendly_name: Exterior Garage Lights
+  ip_address: 10.3.2.104
+
+packages:
+  light: !include devices/maxcio-light-switch.yaml
+
+esphome:
+  area: 'outside'

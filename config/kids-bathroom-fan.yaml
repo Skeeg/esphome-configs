@@ -1,0 +1,12 @@
+---
+substitutions:
+  name: kids-bathroom-fan
+  friendly_name: Kids Bathroom Fan
+  device_class: fan
+  ip_address: 10.3.2.105
+
+packages:
+  light: !include devices/maxcio-light-switch.yaml
+
+esphome:
+  area: 'kids bathroom'

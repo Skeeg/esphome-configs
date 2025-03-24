@@ -1,0 +1,11 @@
+---
+substitutions:
+  name: kids-toilet-lights
+  friendly_name: Kids Toilet Lights
+  ip_address: 10.3.2.107
+
+packages:
+  light: !include devices/maxcio-light-switch.yaml
+
+esphome:
+  area: 'kids bathroom'
