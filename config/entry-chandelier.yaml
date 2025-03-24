@@ -1,0 +1,11 @@
+---
+substitutions:
+  name: entry-chandelier
+  friendly_name: Entry Chandelier
+  ip_address: 10.3.2.124
+
+packages:
+  light: !include devices/gosund-ks-602s-light-switch.yaml
+
+esphome:
+  area: 'entry'

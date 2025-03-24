@@ -1,0 +1,11 @@
+---
+substitutions:
+  name: exterior-side-lights
+  friendly_name: Exterior Side Lights
+  ip_address: 10.3.2.125
+
+packages:
+  light: !include devices/gosund-ks-602s-light-switch.yaml
+
+esphome:
+  area: 'outside'

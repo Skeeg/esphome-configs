@@ -1,0 +1,11 @@
+---
+substitutions:
+  name: kids-sink-lights
+  friendly_name: Kids Sink Lights
+  ip_address: 10.3.2.127
+
+packages:
+  light: !include devices/gosund-ks-602s-light-switch.yaml
+
+esphome:
+  area: 'kids bathroom'
