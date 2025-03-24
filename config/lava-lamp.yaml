@@ -1,0 +1,15 @@
+---
+substitutions:
+  name: lava-lamp
+  friendly_name: Lava Lamp
+  ip_address: 10.3.2.115
+  decoration_timer_on_hour: "7"
+  decoration_timer_off_hour: "17"
+  mdi_icon: 'mdi:lava-lamp'
+
+packages:
+  switch: !include devices/sonoff-basic-r2-switch-mdi.yaml
+  daily-timer: !include common/timers/daily-timer.yaml
+
+esphome:
+  area: 'office'

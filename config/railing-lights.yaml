@@ -1,0 +1,13 @@
+---
+substitutions:
+  name: railing-lights
+  friendly_name: Railing Lights
+  ip_address: 10.3.2.118
+  mdi_icon: 'mdi:string-lights'
+
+packages:
+  switch: !include devices/sonoff-basic-r2-switch-mdi.yaml
+  daily-timer: !include common/timers/daily-timer.yaml
+
+esphome:
+  area: 'upstairs hallway'
