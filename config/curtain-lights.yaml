@@ -1,0 +1,13 @@
+---
+substitutions:
+  name: curtain-lights
+  friendly_name: Curtain Lights
+  ip_address: 10.3.2.120
+  mdi_icon: mdi:string-lights
+
+packages:
+  fence: !include devices/sonoff-basic-r2-switch-mdi.yaml
+  daily-timer: !include common/timers/daily-timer.yaml
+
+esphome:
+  area: 'main'

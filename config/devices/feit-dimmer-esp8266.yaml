@@ -18,7 +18,7 @@ packages:
 
 light:
   - platform: "tuya"
-    name: "Feit Dimmer Light"
+    name: None
     dimmer_datapoint: 2
     switch_datapoint: 1
     min_value: 10
