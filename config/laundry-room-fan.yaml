@@ -1,11 +1,12 @@
 ---
 substitutions:
-  name: unused-gosund-ls-78
-  friendly_name: 78
+  name: laundry-room-fan
+  friendly_name: Laundry Room Fan
   ip_address: 10.3.2.148
+  device_class: fan
 
 packages:
   switch: !include devices/gosund-ks-602s-light-switch.yaml
 
-# esphome:
-#   area: ''
+esphome:
+  area: 'library'

@@ -1,11 +1,11 @@
 ---
 substitutions:
-  name: unused-gosund-ls-6b
-  friendly_name: 6B
+  name: mud-room-lights
+  friendly_name: Mud Room Lights
   ip_address: 10.3.2.153
 
 packages:
   switch: !include devices/gosund-ks-602s-light-switch.yaml
 
-# esphome:
-#   area: ''
+esphome:
+  area: 'mud-room'
