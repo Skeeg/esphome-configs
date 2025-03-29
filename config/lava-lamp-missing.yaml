@@ -1,8 +1,9 @@
+#Not sure if this device actually exists.  Might be a duplicate or displaced, but not finding it.
 ---
 substitutions:
-  name: lava-lamp
-  friendly_name: Lava Lamp
-  ip_address: 10.3.2.95
+  name: lava-lamp-missing
+  friendly_name: Lava Lamp Missing
+  ip_address: 10.3.2.115
   decoration_timer_on_hour: "7"
   decoration_timer_off_hour: "17"
   mdi_icon: 'mdi:lava-lamp'
