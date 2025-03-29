@@ -4,6 +4,7 @@ substitutions:
   friendly_name: Powder Fan
   ip_address: 10.3.2.18
   device_class: fan
+  mdi_icon: 'mdi:fan'
 
 packages:
   fan: !include devices/maxcio-light-switch.yaml

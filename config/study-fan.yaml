@@ -7,6 +7,7 @@ substitutions:
   device_class: fan
   hass_event_name: esphome.3way_study_lights_button
   relay_pin: GPIO4 # Black hole, this is just a control switch.  Don't need the relay "clicking" on.
+  mdi_icon: 'mdi:ceiling-fan'
 
 packages:
   light: !include devices/3way-maxcio-light-switch.yaml

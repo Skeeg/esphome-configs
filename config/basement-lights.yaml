@@ -3,6 +3,7 @@ substitutions:
   name: basement-lights
   friendly_name: Basement Lights
   ip_address: 10.3.2.75
+  mdi_icon: 'mdi:lightbulb-multiple'
 
 packages:
   light: !include devices/maxcio-light-switch.yaml

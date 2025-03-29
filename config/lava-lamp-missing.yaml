@@ -9,7 +9,7 @@ substitutions:
   mdi_icon: 'mdi:lava-lamp'
 
 packages:
-  switch: !include devices/sonoff-basic-r2-switch-mdi.yaml
+  switch: !include devices/sonoff-basic-r2-switch.yaml
   daily-timer: !include common/timers/daily-timer.yaml
 
 esphome:

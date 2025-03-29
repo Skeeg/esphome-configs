@@ -7,7 +7,7 @@ substitutions:
   mdi_icon: 'mdi:ceiling-fan'
 
 packages:
-  fan: !include devices/maxcio-light-switch-mdi.yaml
+  fan: !include devices/maxcio-light-switch.yaml
 
 esphome:
   area: 'main'

@@ -4,6 +4,7 @@ substitutions:
   logger_baud_rate: "0" # disable serial logging by setting baud_rate to 0 because baud_rate/serial connection is used by tuyamcu
   uart_tx_pin: GPIO1
   uart_rx_pin: GPIO3
+  mdi_icon: 'mdi:lightbulb'
 
 packages:
   api: !include ../common/api.yaml
@@ -18,6 +19,7 @@ packages:
 
 light:
   - platform: "tuya"
+    icon: ${mdi_icon}
     name: None
     dimmer_datapoint: 2
     switch_datapoint: 1

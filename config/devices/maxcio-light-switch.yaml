@@ -9,6 +9,7 @@ substitutions:
   device_class: light
   button_as_internal: "true"
   device_restore_mode: "ALWAYS_OFF"
+  mdi_icon: "mdi:lightbulb"
 
 packages:
   api: !include ../common/api.yaml
@@ -35,6 +36,7 @@ binary_sensor:
 
 ${device_class}:
   - platform: binary
+    icon: ${mdi_icon}
     id: ${device_class}_1
     name: None
     on_turn_off:
