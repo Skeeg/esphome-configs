@@ -4,6 +4,8 @@ substitutions:
   physical_button_pin: GPIO00
   relay_pin: GPIO12
   status_led_pin: GPIO13
+  status_led_on_turn_off_action: "light.turn_off" #substitute light.turn_on if you always want the status led to always be on
+  status_led_on_turn_on_action: "light.turn_on" #substitute light.turn_off if you always want the status led to always be off
   device_class: light
   button_as_internal: "true"
   device_restore_mode: "ALWAYS_OFF"
@@ -36,9 +38,9 @@ ${device_class}:
     id: ${device_class}_1
     name: None
     on_turn_off:
-      - light.turn_off: status_1
+      - ${status_led_on_turn_off_action}: status_1
     on_turn_on:
-      - light.turn_on: status_1
+      - ${status_led_on_turn_on_action}: status_1
     output: relay_1
     restore_mode: ${device_restore_mode}
 
