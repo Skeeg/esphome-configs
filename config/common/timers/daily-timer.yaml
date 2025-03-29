@@ -1,8 +1,8 @@
 substitutions:
-  decoration_timer_scope: switch
-  decoration_timer_device: relay_1
-  decoration_timer_on_hour: "7"
-  decoration_timer_off_hour: "23"
+  daily_timer_scope: switch
+  daily_timer_device: relay_1
+  daily_timer_on_hour: "7"
+  daily_timer_off_hour: "23"
 
 time:
   - platform: sntp
@@ -11,13 +11,13 @@ time:
       # Turn on my_switch at 7:00 AM
       - seconds: 0
         minutes: 0
-        hours: ${decoration_timer_on_hour}
+        hours: ${daily_timer_on_hour}
         then:
-          - ${decoration_timer_scope}.turn_on: ${decoration_timer_device}
+          - ${daily_timer_scope}.turn_on: ${daily_timer_device}
 
       # Turn off my_switch at 11:00 PM
       - seconds: 0
         minutes: 0
-        hours: ${decoration_timer_off_hour}
+        hours: ${daily_timer_off_hour}
         then:
-          - ${decoration_timer_scope}.turn_off: ${decoration_timer_device}
+          - ${daily_timer_scope}.turn_off: ${daily_timer_device}

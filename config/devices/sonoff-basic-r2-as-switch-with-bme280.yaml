@@ -10,6 +10,7 @@ substitutions:
   i2c_sda: GPIO3
   logger_baud_rate: "0"
   device_restore_mode: "ALWAYS_OFF"
+  mdi_icon: 'mdi:light-switch'
 
 packages:
   api: !include ../common/api.yaml
@@ -111,6 +112,7 @@ sensor:
 switch:
   - platform: gpio
     pin: ${relay_pin}
+    icon: ${mdi_icon}
     id: relay_1
     name: None
     on_turn_off:

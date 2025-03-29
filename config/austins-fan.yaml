@@ -8,6 +8,7 @@ substitutions:
   on_timer_device: fan_1
   on_timer_minutes: "/30"
   device_restore_mode: "ALWAYS_ON"
+  mdi_icon: 'mdi:fan'
 
 packages:
   switch: !include devices/sonoff-basic-r2.yaml

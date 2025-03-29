@@ -5,7 +5,7 @@ substitutions:
   ip_address: 10.3.2.89
 
 packages:
-  switch: !include devices/sonoff-basic-r2-switch.yaml
+  switch: !include devices/sonoff-basic-r2-as-switch.yaml
 
 # esphome:
 #   area: 'office'

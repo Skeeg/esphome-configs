@@ -6,6 +6,7 @@ substitutions:
   relay_pin: GPIO12
   status_led_pin: GPIO13
   device_class: light
+  mdi_icon: mdi:lightbulb
   button_as_internal: "true"
   i2c_scl: GPIO1
   i2c_sda: GPIO3
@@ -56,6 +57,7 @@ light:
   - platform: status_led
     disabled_by_default: true
     id: blue_led
+    icon: ${mdi_icon}
     internal: true
     name: "Status LED"
     pin:
