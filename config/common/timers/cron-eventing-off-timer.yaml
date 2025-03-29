@@ -3,6 +3,7 @@ substitutions:
   off_timer_device: relay_1
   off_timer_seconds: "0"
   off_timer_minutes: "/15"
+  off_timer_hours: "*"
 
 time:
   - platform: sntp
@@ -10,6 +11,7 @@ time:
     on_time:
       - seconds: ${off_timer_seconds}
         minutes: ${off_timer_minutes}
+        hours: ${off_timer_hours}
         then:
           - ${off_timer_scope}.turn_off: ${off_timer_device}
 

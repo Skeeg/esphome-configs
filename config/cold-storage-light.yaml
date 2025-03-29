@@ -9,7 +9,7 @@ substitutions:
 
 packages:
   switch: !include devices/gosund-ks-602s-light-switch.yaml
-  15-minute-off: !include common/timers/minute-eventing-off-timer.yaml
+  cron-off: !include common/timers/cron-eventing-off-timer.yaml
 
 esphome:
   area: 'cold storage'

@@ -10,7 +10,7 @@ substitutions:
 
 packages:
   power-monitor: !include devices/w-us002s-power-monitor.yaml
-  every-minute-on: !include common/timers/minute-eventing-on-timer.yaml
+  cron-on: !include common/timers/cron-eventing-on-timer.yaml
 
 esphome:
   area: 'garage'

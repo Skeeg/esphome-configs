@@ -11,7 +11,7 @@ substitutions:
 
 packages:
   switch: !include devices/sonoff-basic-r2.yaml
-  every-30-minute-on: !include common/timers/minute-eventing-on-timer.yaml
+  cron-on: !include common/timers/cron-eventing-on-timer.yaml
 
 esphome:
   area: 'lily'
