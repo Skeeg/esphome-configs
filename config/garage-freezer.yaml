@@ -7,6 +7,7 @@ substitutions:
   current_resistor: "0.002372161940866017" #New values via calculator at https://esphome.io/components/sensor/hlw8012.html
   current_multiply: "1.007049880556328"
   device_restore_mode: "ALWAYS_ON"
+  mdi_icon: 'mdi:fridge-industrial'
 
 packages:
   power-monitor: !include devices/w-us002s-power-monitor.yaml

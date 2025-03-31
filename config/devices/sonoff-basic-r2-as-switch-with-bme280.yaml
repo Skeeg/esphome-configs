@@ -10,7 +10,7 @@ substitutions:
   i2c_sda: GPIO3
   logger_baud_rate: "0"
   device_restore_mode: "ALWAYS_OFF"
-  mdi_icon: 'mdi:light-switch'
+  mdi_icon: "mdi:power-socket-us"
 
 packages:
   api: !include ../common/api.yaml

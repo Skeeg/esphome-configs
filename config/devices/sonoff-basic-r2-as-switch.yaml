@@ -7,7 +7,7 @@ substitutions:
   status_led_pin: GPIO13
   button_as_internal: "true"
   device_restore_mode: "ALWAYS_OFF"
-  mdi_icon: 'mdi:light-switch'
+  mdi_icon: "mdi:power-socket-us"
 
 packages:
   api: !include ../common/api.yaml

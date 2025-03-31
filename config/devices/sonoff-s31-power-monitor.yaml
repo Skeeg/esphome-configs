@@ -9,6 +9,7 @@ substitutions:
   global_logging_level: INFO # VERBOSE will spamming the cse7766 sensor
   sensor_logging_level: INFO # VERBOSE will spamming the cse7766 sensor
   button_as_internal: "true"
+  mdi_icon: "mdi:power-socket-us"
 
 packages:
   api: !include ../common/api.yaml
@@ -88,6 +89,7 @@ switch:
   - platform: gpio
     name: None
     pin: ${relay_pin}
+    icon: ${mdi_icon}
     id: relay_1
     restore_mode: ${device_restore_mode} 
 

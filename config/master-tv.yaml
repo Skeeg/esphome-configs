@@ -9,6 +9,7 @@ substitutions:
   on_timer_seconds: "0"
   on_timer_minutes: "0"
   on_timer_hours: "11"
+  mdi_icon: 'mdi:television-classic'
 
 packages:
   power-monitor: !include devices/w-us002s-power-monitor.yaml
