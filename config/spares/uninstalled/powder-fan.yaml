@@ -2,12 +2,12 @@
 substitutions:
   name: powder-fan
   friendly_name: Powder Fan
-  ip_address: 10.3.2.154
+  ip_address: 10.3.2.18
   device_class: fan
   mdi_icon: 'mdi:fan'
 
 packages:
-  switch: !include devices/gosund-ks-602s-light-switch.yaml
+  fan: !include devices/maxcio-light-switch.yaml
 
 esphome:
   area: 'powder bathroom'
