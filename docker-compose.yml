@@ -5,7 +5,7 @@ services:
     volumes:
       - ./config:/config:rw
       - /etc/localtime:/etc/localtime:ro
-    restart: always
+    restart: no
     network_mode: bridge
     environment:
       - PUID=1000

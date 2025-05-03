@@ -26,6 +26,53 @@ light:
     min_value: 10
     max_value: 1000
 
+number:
+  - platform: tuya
+    number_datapoint: 3
+    name: Brightness Min 1
+    min_value: 10
+    max_value: 1000
+    step: 1
+  - platform: tuya
+    number_datapoint: 5
+    name: Brightness Max
+    min_value: 10
+    max_value: 2000
+    step: 1
+  - platform: tuya
+    number_datapoint: 6
+    name: Countdown
+    unit_of_measurement: s
+    min_value: 0
+    max_value: 86400
+    step: 1
+
+select:
+  - platform: tuya
+    enum_datapoint: 4
+    name: Led Type 1
+    optimistic: true
+    options:
+      0: Led
+      1: Incandescent
+      2: Halogen
+  - platform: tuya
+    enum_datapoint: 101
+    name: Led Bright 1
+    optimistic: true
+    options:
+      0: "Off"
+      1: Low
+      2: High
+  - platform: tuya
+    enum_datapoint: 102
+    name:  On Control
+    optimistic: true
+    options:
+      0: Gradual
+      1: Instant
+      2: Switch
+
 tuya:
 
 uart:

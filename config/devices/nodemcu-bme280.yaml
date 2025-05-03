@@ -1,23 +1,23 @@
 ---
 substitutions:
   esp8266_board: nodemcu
-  i2c_scl: D1
-  i2c_sda: D2
+  i2c_scl_pin: D1
+  i2c_sda_pin: D2
 
 packages:
-  api: !include common/api.yaml
-  common-elements: !include common/common-elements.yaml
-  common-esp8266: !include common/common-esp8266.yaml
-  esphome: !include common/esphome.yaml
-  logger: !include common/logger.yaml
-  ota: !include common/ota.yaml
-  time: !include common/time.yaml
-  web: !include common/web-server.yaml
-  wifi: !include common/wifi.yaml
+  api: !include ../common/api.yaml
+  common-elements: !include ../common/common-elements.yaml
+  common-esp8266: !include ../common/common-esp8266.yaml
+  esphome: !include ../common/esphome.yaml
+  logger: !include ../common/logger.yaml
+  ota: !include ../common/ota.yaml
+  time: !include ../common/time.yaml
+  web: !include ../common/web-server.yaml
+  wifi: !include ../common/wifi.yaml
 
 i2c:
-  - scl: ${i2c_scl}
-    sda: ${i2c_sda}
+  - scl: ${i2c_scl_pin}
+    sda: ${i2c_sda_pin}
     scan: true
     id: i2c_main
 

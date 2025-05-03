@@ -1,7 +1,7 @@
 ---
 substitutions:
-  name: unused-62
-  friendly_name: Unused 62
+  name: greenhouse-fan
+  friendly_name: Greenhouse Fan
   ip_address: 10.3.2.52
   voltage_divider: "2069.986759838176" #Calibrated on 2025-03-16
   current_resistor: "0.002372161940866017" #New values via calculator at https://esphome.io/components/sensor/hlw8012.html
@@ -10,5 +10,5 @@ substitutions:
 packages:
   power-monitor: !include devices/w-us002s-power-monitor.yaml
 
-# esphome:
-#   area: 'office'
+esphome:
+  area: 'greenhouse'
