@@ -1,11 +1,14 @@
 ---
 substitutions:
-  name: unused-b7
-  friendly_name: Unused B7
+  name: washing-machine
+  friendly_name: Washing Machine
   ip_address: 10.3.2.45
+  device_restore_mode: "ALWAYS_ON"
+  mdi_icon: 'mdi:washing-machine'
 
 packages:
   power-monitor: !include devices/sonoff-s31-power-monitor.yaml
+  cron-on: !include common/timers/cron-eventing-on-timer.yaml
 
-# esphome:
-#   area: 'Office'
+esphome:
+  area: 'Laundry Room'
