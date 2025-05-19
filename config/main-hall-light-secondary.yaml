@@ -11,4 +11,4 @@ packages:
   switch: !include devices/3way-gosund-ks-602s-light-switch.yaml
 
 esphome:
-  area: 'main'
+  area: 'Family'

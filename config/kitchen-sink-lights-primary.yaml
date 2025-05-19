@@ -10,4 +10,4 @@ packages:
   switch: !include devices/3way-gosund-ks-602s-light-switch.yaml
 
 esphome:
-  area: 'kitchen'
+  area: 'Kitchen'

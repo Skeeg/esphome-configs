@@ -8,4 +8,4 @@ packages:
   climate-sensor: !include devices/wemod1-bme280.yaml
 
 esphome:
-  area: 'office'
+  area: 'Office'

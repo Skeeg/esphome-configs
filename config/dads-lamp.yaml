@@ -9,4 +9,4 @@ packages:
   switch: !include devices/sonoff-basic-r2.yaml
 
 esphome:
-  area: 'dads'
+  area: 'Dads'

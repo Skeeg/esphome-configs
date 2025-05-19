@@ -9,4 +9,4 @@ packages:
   power-monitor: !include devices/sonoff-s31-power-monitor.yaml
 
 esphome:
-  area: 'utility'
+  area: 'Utility'

@@ -9,4 +9,4 @@ packages:
   light: !include devices/maxcio-light-switch.yaml
 
 esphome:
-  area: 'outside'
+  area: 'Outside'

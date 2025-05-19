@@ -19,13 +19,13 @@ packages:
   soundbar: !include common/infrared/ir-sony-soundbar.yaml
 
 esphome:
-  area: 'main'
+  area: 'Family'
 
-remote_receiver:
-  pin:
-    number: D5
-    inverted: true
-  dump: all
+# remote_receiver:
+#   pin:
+#     number: D5
+#     inverted: true
+#   dump: all
 
 remote_transmitter:
   pin: D7

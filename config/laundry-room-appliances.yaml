@@ -8,4 +8,4 @@ packages:
   power-monitor: !include devices/sonoff-s31-power-monitor.yaml
 
 esphome:
-  area: 'laundry'
+  area: 'Laundry Room'

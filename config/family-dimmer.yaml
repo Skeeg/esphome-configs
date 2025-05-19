@@ -8,4 +8,4 @@ packages:
   feit_dimmer_esp8266: !include devices/feit-dimmer-esp8266.yaml
 
 esphome:
-  area: 'main'
+  area: 'Family'

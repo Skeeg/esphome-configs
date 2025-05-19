@@ -10,4 +10,4 @@ packages:
   light: !include devices/3way-maxcio-light-switch.yaml
 
 esphome:
-  area: 'study'
+  area: 'Study'

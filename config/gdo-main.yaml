@@ -9,4 +9,4 @@ packages:
   ratgdo: !include devices/ratgdo-25i.yaml
 
 esphome:
-  area: 'garage'
+  area: 'Garage'

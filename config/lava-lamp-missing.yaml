@@ -13,4 +13,4 @@ packages:
   daily-timer: !include common/timers/daily-timer.yaml
 
 esphome:
-  area: 'office'
+  area: 'Office'

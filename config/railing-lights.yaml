@@ -12,4 +12,4 @@ packages:
   daily-timer: !include common/timers/daily-timer.yaml
 
 esphome:
-  area: 'upstairs hallway'
+  area: 'Upstairs Hallway'

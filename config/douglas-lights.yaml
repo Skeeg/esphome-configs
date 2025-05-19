@@ -10,7 +10,7 @@ substitutions:
 
 packages:
   power-monitor: !include devices/w-us002s-power-monitor.yaml
-  daily-timer: !include common/timers/daily-timer.yaml
+  sun-timer: !include common/timers/sun.yaml
 
-# esphome:
-#   area: 'office'
+esphome:
+  area: 'Study'

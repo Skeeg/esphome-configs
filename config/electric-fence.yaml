@@ -12,4 +12,4 @@ packages:
   cron-on: !include common/timers/cron-eventing-on-timer.yaml
 
 esphome:
-  area: 'outside'
+  area: 'Outside'

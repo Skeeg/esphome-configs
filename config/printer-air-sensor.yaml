@@ -9,4 +9,4 @@ packages:
   advanced_air_sensor: !include devices/air-sensor-v2-pms5003s.yaml #Formaldehyde sensor
 
 esphome:
-  area: 'office'
+  area: 'Office'

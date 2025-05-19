@@ -9,4 +9,4 @@ packages:
   light: !include devices/gosund-ks-602s-light-switch.yaml
 
 esphome:
-  area: 'dads'
+  area: 'Dads'

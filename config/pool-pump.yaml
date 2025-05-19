@@ -1,11 +1,12 @@
 ---
 substitutions:
-  name: unused-2a
-  friendly_name: Unused 2A
+  name: pool-pump
+  friendly_name: Pool Pump
   ip_address: 10.3.2.47
+  mdi_icon: mdi:pump
 
 packages:
   power-monitor: !include devices/sonoff-s31-power-monitor.yaml
 
-# esphome:
-#   area: 'office'
+esphome:
+  area: 'Outside'

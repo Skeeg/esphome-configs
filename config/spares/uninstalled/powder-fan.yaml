@@ -10,4 +10,4 @@ packages:
   fan: !include devices/maxcio-light-switch.yaml
 
 esphome:
-  area: 'powder bathroom'
+  area: 'Powder'

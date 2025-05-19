@@ -11,4 +11,4 @@ packages:
   cron-on: !include common/timers/cron-eventing-on-timer.yaml
 
 esphome:
-  area: 'utility'
+  area: 'Utility'

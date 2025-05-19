@@ -10,4 +10,4 @@ packages:
   air_sensor: !include devices/air-sensor-v2-pms5003.yaml
 
 esphome:
-  area: 'study'
+  area: 'Study'

@@ -5,6 +5,7 @@ substitutions:
   ip_address: 10.3.2.74
   off_timer_scope: light
   off_timer_device: light_1
+  off_timer_seconds: "0"
   off_timer_minutes: "/15"
 
 packages:
@@ -12,4 +13,4 @@ packages:
   cron-off: !include common/timers/cron-eventing-off-timer.yaml
 
 esphome:
-  area: 'cold storage'
+  area: 'Basement'

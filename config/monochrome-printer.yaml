@@ -14,4 +14,4 @@ packages:
   power-monitor: !include devices/sonoff-s31-power-monitor.yaml
 
 esphome:
-  area: 'study'
+  area: 'Study'
