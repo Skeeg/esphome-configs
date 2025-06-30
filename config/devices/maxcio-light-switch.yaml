@@ -8,6 +8,7 @@ substitutions:
   status_led_on_turn_on_action: "light.turn_on" #substitute light.turn_off if you always want the status led to always be off
   device_class: light
   button_as_internal: "true"
+  button_on_press_action: toggle
   device_restore_mode: "ALWAYS_OFF"
   mdi_icon: "mdi:lightbulb"
 
@@ -31,7 +32,7 @@ binary_sensor:
     internal: ${button_as_internal}
     name: Button
     on_press:
-      - ${device_class}.toggle: ${device_class}_1
+      - ${device_class}.${button_on_press_action}: ${device_class}_1
     pin: ${physical_button_pin}
 
 ${device_class}:
